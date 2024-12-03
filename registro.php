@@ -17,11 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $correo = $_POST['correo'];
     $contraseña = $_POST['contraseña'];
     $telefono = $_POST['telefono'];
-    
-    // Verificar si las contraseñas coinciden
-    if ($contraseña != $_POST['confirmar_contraseña']) {
-        die('Las contraseñas no coinciden');
-    }
 
     // Preparar la consulta para insertar los datos
     $consulta = "INSERT INTO usuarios (usuario, correo, contraseña, telefono) VALUES ('$usuario', '$correo', '$contraseña', '$telefono')";
@@ -30,7 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $resultado = pg_query($conexion, $consulta);
 
     if ($resultado) {
-        echo "Usuario registrado con éxito";
+        // Redirigir a la página de inicio (index.php) después del registro exitoso
+        header("Location: index.php");
+        exit();  // Asegúrate de llamar a exit() después de la redirección
     } else {
         echo "Error al registrar el usuario: " . pg_last_error($conexion);
     }
@@ -38,3 +35,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     pg_close($conexion);
 }
 ?>
+
