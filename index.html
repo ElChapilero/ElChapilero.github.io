@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    <title>Tablas</title>
+    <link rel="icon" href="logo_blanco.png" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Tablas</a>
+
+            <div class="nav-links">
+                <div class="nav-item dropdown">
+                    <a href="#" class="perfil" onclick="toggleProfileMenu(event)">Perfil</a>
+                    <div id="profileMenu" class="dropdown-menu">
+                        <div class="dropdown-title">Nombre Usuario</div>
+                        <a href="register.html">Registrarse</a>
+                        <a href="#">Cerrar Sesión</a>
+                    </div>
+                </div>
+                <script src="menu-perfil.js"></script>
+            </div>
+        </div>
+    </nav>
+    <div class="title-bar">
+        <h1>Marcas</h1>
+    </div>
+
+    <div class="main-content centered">
+
+        <main>
+            <h2>Listado de Clientes</h2>
+            <table id="tabla-clientes">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </main>
+        
+    </div>
+
+    <script>
+        const clientes = [
+            { id: 1, nombre: "Juan Pérez", email: "juan@example.com", telefono: "123456789" },
+            { id: 2, nombre: "María López", email: "maria@example.com", telefono: "987654321" },
+            { id: 3, nombre: "Carlos García", email: "carlos@example.com", telefono: "456123789" }
+        ];
+
+        window.onload = () => {
+            const tbody = document.querySelector('#tabla-clientes tbody');
+            clientes.forEach(cliente => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${cliente.id}</td>
+                    <td>${cliente.nombre}</td>
+                    <td>${cliente.email}</td>
+                    <td>${cliente.telefono}</td>
+                `;
+                tbody.appendChild(fila);
+            });
+        };
+    </script>
+    <script src="mensaje.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
