@@ -4,74 +4,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style2.css">
-    <title>Tablas</title>
+    <link rel="stylesheet" href="index.css">
+    <title>Ahorro de Energía</title>
     <link rel="icon" href="logo_blanco.png" type="image/x-icon">
 </head>
 
 <body>
+    <!-- Primera Barra de Navegación -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">Tablas</a>
-
-            <div class="nav-links">
-                <div class="nav-item dropdown">
-                    <a href="#" class="perfil" onclick="toggleProfileMenu(event)">Perfil</a>
-                    <div id="profileMenu" class="dropdown-menu">
-                        <div class="dropdown-title">Nombre Usuario</div>
-                        <a href="register.html">Registrarse</a>
-                        <a href="#">Cerrar Sesión</a>
-                    </div>
-                </div>
-                <script src="menu-perfil.js"></script>
+            <a href="index.html" class="nav-logo">Ahorro de Energía</a>
+        
+            <!-- Botón para dispositivos móviles -->
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        
+            <!-- Menú desplegable -->
+            <div id="navLinks" class="nav-links">
+                <a href="perfil.html" class="nav-item">Perfil de Hogar</a>
+                <a href="Recomendaciones.html" class="nav-item">Recomendaciones</a>
+                <a href="Notificaciones.html" class="nav-item">Notificaciones</a>
+                <a href="historial.html" class="nav-item">Historial de Consumo</a>
+                <a href="Graficas.html" class="nav-item">Gráficas / Comparativas</a>
             </div>
         </div>
-    </nav>
+        <div id="profile-section" class="profile-container">
+            <!-- Texto inicial que se reemplaza cuando el usuario está logueado -->
+            <button class="menu-toggle-p" id="profile-name">Perfil</button>
+        
+            <!-- Menú desplegable -->
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="sign_in.html">Iniciar Sesion</a>
+                <a class="dropdown-item" href="register.html">Crear Cuenta</a>
+                <a class="dropdown-item" href="index.html"style="display: none;">Cerrar Sesion</a>
+            </div>
+        </div>
+        
+    </nav>   
+
+    <!-- Segunda Barra con el Título de la Ventana -->
     <div class="title-bar">
-        <h1>Marcas</h1>
+        <h1>Ahorro de Energía</h1>
     </div>
 
     <div class="main-content centered">
 
-        <main>
-            <h2>Listado de Clientes</h2>
-            <table id="tabla-clientes">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </main>
-        
+        <!-- Contenido Principal -->
+        <div class="home">
+
+            <!-- Sección principal -->
+            <div class="section-principal">
+                <div class="image-container">
+                    <img src="logo_web.png" alt="Logo">
+                </div>
+                <div class="text-container">
+                    <h2>Ahorro de Energia</h2>
+                    <h3>Nos alegra que hayas llegado hasta aquí. Esta aplicación ha sido diseñada para ayudarte a
+                        reducir el consumo de energía en tu hogar de una manera sencilla y efectiva. Con nuestras
+                        recomendaciones personalizadas, podrás optimizar el uso de tus electrodomésticos, conocer
+                        hábitos más sostenibles y hacer un seguimiento de tu consumo energético.</h3>
+                </div>
+            </div>
+
+            <!-- Sección perfil-->
+            <div class="section-perfil">
+                <div class="image-container">
+                    <img src="perfil.png" alt="Logo">
+                </div>
+                <div class="text-container">
+                    <h2>Perfil de Hogar: </h2>
+                    <h3>En esta sección, el usuario puede ingresar y ajustar los detalles de su hogar, como el tipo y
+                        número de electrodomésticos que posee. Esto permite personalizar las recomendaciones de ahorro y
+                        obtener estadísticas más precisas basadas en su consumo específico.</h3>
+                </div>
+            </div>
+
+            <!-- Sección recomendaciones-->
+            <div class="section-recomendaciones">
+                <div class="image-container">
+                    <img src="recomendacion.png" alt="Logo">
+                </div>
+                <div class="text-container">
+                    <h2>Recomendaciones / Notificaciones</h2>
+                    <h3>Aquí se mostrarán sugerencias para optimizar el uso de la energía en el hogar, desde cambiar
+                        horarios de uso hasta implementar hábitos más eficientes. Además, las notificaciones alertan
+                        sobre momentos de alto consumo o recordatorios para mejorar la eficiencia.</h3>
+                </div>
+            </div>
+
+            <!-- Sección historial-->
+            <div class="section-historial">
+                <div class="image-container">
+                    <img src="historial.png" alt="Logo">
+                </div>
+                <div class="text-container">
+                    <h2>Historial de Consumo</h2>
+                    <h3>Esta sección permite al usuario visualizar el consumo energético pasado, identificando
+                        tendencias y patrones. De esta forma, pueden evaluar el impacto de sus esfuerzos de ahorro y
+                        ajustar sus hábitos según sea necesario.</h3>
+                </div>
+            </div>
+
+            <!-- Sección grafica-->
+            <div class="section-graficas">
+                <div class="image-container">
+                    <img src="graficas.png" alt="Logo">
+                </div>
+                <div class="text-container">
+                    <h2>Gráficas / Comparativas</h2>
+                    <h3>Proporciona representaciones visuales de los datos de consumo, facilitando la comparación entre
+                        diferentes periodos o con usuarios de perfiles similares. Esto ayuda a entender mejor cómo y
+                        dónde se consume más energía y motiva a realizar mejoras.</h3>
+                </div>
+            </div>
+        </div>
+
     </div>
-
-    <script>
-        const clientes = [
-            { id: 1, nombre: "Juan Pérez", email: "juan@example.com", telefono: "123456789" },
-            { id: 2, nombre: "María López", email: "maria@example.com", telefono: "987654321" },
-            { id: 3, nombre: "Carlos García", email: "carlos@example.com", telefono: "456123789" }
-        ];
-
-        window.onload = () => {
-            const tbody = document.querySelector('#tabla-clientes tbody');
-            clientes.forEach(cliente => {
-                const fila = document.createElement('tr');
-                fila.innerHTML = `
-                    <td>${cliente.id}</td>
-                    <td>${cliente.nombre}</td>
-                    <td>${cliente.email}</td>
-                    <td>${cliente.telefono}</td>
-                `;
-                tbody.appendChild(fila);
-            });
-        };
-    </script>
+    <script src="menuperfil.js"></script>
+    <script src="movilemenu.js"></script>
     <script src="mensaje.js"></script>
     <script src="index.js"></script>
 </body>

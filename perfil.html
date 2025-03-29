@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="perfil.css">
+    <title>Perfil de Hogar</title>
+    <link rel="icon" href="logo_blanco.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Primera Barra de Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Ahorro de Energía</a>
+        
+            <!-- Botón para dispositivos móviles -->
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        
+            <!-- Menú desplegable -->
+            <div id="navLinks" class="nav-links">
+                <a href="perfil.html" class="nav-item">Perfil de Hogar</a>
+                <a href="Recomendaciones.html" class="nav-item">Recomendaciones</a>
+                <a href="Notificaciones.html" class="nav-item">Notificaciones</a>
+                <a href="historial.html" class="nav-item">Historial de Consumo</a>
+                <a href="Graficas.html" class="nav-item">Gráficas / Comparativas</a>
+            </div>
+        </div>
+        <div id="profile-section" class="profile-container">
+            <!-- Texto inicial que se reemplaza cuando el usuario está logueado -->
+            <button class="menu-toggle-p" id="profile-name">Perfil</button>
+        
+            <!-- Menú desplegable -->
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="sign_in.html">Iniciar Sesion</a>
+                <a class="dropdown-item" href="register.html">Crear Cuenta</a>
+                <a class="dropdown-item" href="index.html"style="display: none;">Cerrar Sesion</a>
+            </div>
+        </div>
+        
+    </nav>
+
+    <!-- Segunda Barra con el Título de la Ventana -->
+    <div class="title-bar">
+        <h1>Perfil de Hogar</h1>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="main-content centered">
+
+        <!-- Sección de Tipo de Hogar -->
+        <div class="home">
+
+            <div class="home-type-section">
+                <h2>Tipo de Hogar</h2>
+                <select id="tipo-hogar">
+                    <option value="apartamento">Apartamento</option>
+                    <option value="casa">Casa unifamiliar</option>
+                    <option value="villa">Casa plunrifamiliar</option>
+                </select>
+                <button onclick="showNotification('Perfil de hogar seleccionado', 'logo_blanco.png')" class="button"
+                    id="crear-perfil">Crear perfil de hogar</button>
+            </div>
+
+            <!-- Sección de Selección de Categoría de Electrodomésticos -->
+            <div class="selection-section">
+                <h2>Categoría de Electrodoméstico</h2>
+                <select id="categoria-electrodomestico">
+                    <option value="Cocina">Cocina</option>
+                    <option value="Limpieza">Limpieza</option>
+                    <option value="Climatización">Climatización</option>
+                    <option value="Entretenimiento">Entretenimiento</option>
+                    <option value="Iluminación">Iluminación</option>
+                    <option value="Seguridad_y_automatización">Seguridad y automatización</option>
+                </select>
+
+                <h2>Electrodoméstico Específico</h2>
+                <select id="electrodomestico">
+                    <option value="Refrigerador">Refrigerador</option>
+                    <option value="Horno">Horno</option>
+                    <option value="Microondas">Microondas</option>
+                    <option value="Licuadora">Licuadora</option>
+                    <option value="Estufa">Estufa</option>
+                </select>
+
+                <h2>Consumo Aproximado (Watts)</h2>
+                <select id="electrodomestico">
+                    <option value="nevera">100 - 150</option>
+                    <option value="lavadora">151 - 200</option>
+                    <option value="aire-acondicionado">201 - 250</option>
+                    <option value="aire-acondicionado">251 - 300</option>
+                    <option value="aire-acondicionado">301 - 350</option>
+                </select>
+                <button onclick="showNotification('Electrodomestico agregado', 'logo_blanco.png')" class="button"
+                    id="crear-perfil">Agregar Electrodoméstico</button>
+                <button onclick="showNotification('Lista terminada', 'logo_blanco.png')" class="button"
+                    id="crear-perfil">Terminar Lista de Electrodoméstico</button>
+            </div>
+
+            <!-- Sección de Consejos Generales -->
+            <div class="advice-section">
+                <h2>Electrodomésticos</h2>
+                <!-- <p id="consejos">Aquí aparecerán la lista de los electrodomesticos.</p> -->
+                <table>
+                    <thead>
+                        <caption>Tipo de Hogar (su seleccion)</caption>
+                        <tr>
+                            <th>Categoría</th>
+                            <th>Electrodoméstico</th>
+                            <th>Watts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cocina</td>
+                            <td>Microondas</td>
+                            <td>1200</td>
+                        </tr>
+                        <tr>
+                            <td>Lavandería</td>
+                            <td>Lavadora</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Entretenimiento</td>
+                            <td>Televisión</td>
+                            <td>150</td>
+                        </tr>
+                        <tr>
+                            <td>Cocina</td>
+                            <td>Microondas</td>
+                            <td>1200</td>
+                        </tr>
+                        <tr>
+                            <td>Lavandería</td>
+                            <td>Lavadora</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Entretenimiento</td>
+                            <td>Televisión</td>
+                            <td>150</td>
+                        </tr>
+                        <tr>
+                            <td>Cocina</td>
+                            <td>Microondas</td>
+                            <td>1200</td>
+                        </tr>
+                        <tr>
+                            <td>Lavandería</td>
+                            <td>Lavadora</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Entretenimiento</td>
+                            <td>Televisión</td>
+                            <td>150</td>
+                        </tr>
+                        <tr>
+                            <td>Cocina</td>
+                            <td>Microondas</td>
+                            <td>1200</td>
+                        </tr>
+                        <tr>
+                            <td>Lavandería</td>
+                            <td>Lavadora</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Entretenimiento</td>
+                            <td>Televisión</td>
+                            <td>150</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <script src="menuperfil.js"></script>
+    <script src="movilemenu.js"></script>
+    <script src="mensaje.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

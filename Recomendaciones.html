@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Recomendaciones.css">
+    <title>Recomendaciones</title>
+    <link rel="icon" href="logo_blanco.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Primera Barra de Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Ahorro de Energía</a>
+        
+            <!-- Botón para dispositivos móviles -->
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        
+            <!-- Menú desplegable -->
+            <div id="navLinks" class="nav-links">
+                <a href="perfil.html" class="nav-item">Perfil de Hogar</a>
+                <a href="Recomendaciones.html" class="nav-item">Recomendaciones</a>
+                <a href="Notificaciones.html" class="nav-item">Notificaciones</a>
+                <a href="historial.html" class="nav-item">Historial de Consumo</a>
+                <a href="Graficas.html" class="nav-item">Gráficas / Comparativas</a>
+            </div>
+        </div>
+        <div id="profile-section" class="profile-container">
+            <!-- Texto inicial que se reemplaza cuando el usuario está logueado -->
+            <button class="menu-toggle-p" id="profile-name">Perfil</button>
+        
+            <!-- Menú desplegable -->
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="sign_in.html">Iniciar Sesion</a>
+                <a class="dropdown-item" href="register.html">Crear Cuenta</a>
+                <a class="dropdown-item" href="index.html"style="display: none;">Cerrar Sesion</a>
+            </div>
+        </div>
+        
+    </nav>
+
+    <!-- Segunda Barra con el Título de la Ventana -->
+    <div class="title-bar">
+        <h1>Recomendaciones</h1>
+    </div>
+
+    <!-- Contenido Principal en forma de "hoja" -->
+    <div class="main-content centered">
+
+        <div class="home">
+            <div class="recommendations-section">
+                <h2>Recomendaciones</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Recomendacion corta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hábitos</td>
+                            <td>Apaga luces y dispositivos</td>
+                        </tr>
+                        <tr>
+                            <td>Cambio de Electrodomésticos</td>
+                            <td>Usa bombillas LED</td>
+                        </tr>
+                        <tr>
+                            <td>Uso de Aparatos</td>
+                            <td>Ajusta la temperatura del aire</td>
+                        </tr>
+                        <tr>
+                            <td>Hábitos</td>
+                            <td>Apaga luces y dispositivos</td>
+                        </tr>
+                        <tr>
+                            <td>Cambio de Electrodomésticos</td>
+                            <td>Usa bombillas LED</td>
+                        </tr>
+                        <tr>
+                            <td>Uso de Aparatos</td>
+                            <td>Ajusta la temperatura del aire</td>
+                        </tr>
+                        <tr>
+                            <td>Hábitos</td>
+                            <td>Apaga luces y dispositivos</td>
+                        </tr>
+                        <tr>
+                            <td>Cambio de Electrodomésticos</td>
+                            <td>Usa bombillas LED</td>
+                        </tr>
+                        <tr>
+                            <td>Uso de Aparatos</td>
+                            <td>Ajusta la temperatura del aire</td>
+                        </tr>
+                        <tr>
+                            <td>Hábitos</td>
+                            <td>Apaga luces y dispositivos</td>
+                        </tr>
+                        <tr>
+                            <td>Cambio de Electrodomésticos</td>
+                            <td>Usa bombillas LED</td>
+                        </tr>
+                        <tr>
+                            <td>Uso de Aparatos</td>
+                            <td>Ajusta la temperatura del aire</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="menuperfil.js"></script>
+    <script src="movilemenu.js"></script>
+</body>
+
+</html>

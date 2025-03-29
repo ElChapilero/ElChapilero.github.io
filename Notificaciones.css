@@ -1,0 +1,431 @@
+:root {
+    --primary-color: #424242;
+    --secondary-color: #585858;
+    --secondary2-color: #6b6b6b;
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #efefef;
+    --gray-2: #2b2828;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+/* TEXTO */
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+p {
+    font-family: 'Poppins', sans-serif;
+    max-width: 100%;
+    word-break: break-word;
+    /* Divide palabras largas si es necesario */
+    overflow-wrap: break-word;
+    /* Asegura compatibilidad para palabras largas */
+}
+
+h2 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+h2,
+h3 {
+    margin-bottom: 1vw;
+}
+
+h3 {
+    color: var(--secondary-color);
+    font-size: 1rem;
+}
+
+/* FIN TEXTO */
+
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* TITULOS */
+/* Estilos básicos */
+.navbar {
+    background-color: var(--primary-color);
+    /* Color de fondo */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    /* Alinea verticalmente en el mismo nivel */
+    justify-content: space-between;
+    /* Espaciado entre extremos */
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    /* Asegura que ocupe todo el espacio */
+}
+
+.nav-logo {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    /* Alineación horizontal de los enlaces */
+    gap: 15px;
+    /* Espaciado entre enlaces */
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+/* Botón de menú para móvil (oculto en escritorio) */
+.menu-toggle {
+    display: none;
+    /* Oculto por defecto en PC */
+    background-color: white;
+    color: #007BFF;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.title-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #555;
+    color: white;
+    padding: 0 1vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height: 6vh;
+    /* 6% */
+}
+
+/*--------------------------------------------------------FIN TITULOS-----------------------------------------------*/
+
+.main-content {
+    display: flex;
+    padding: 1vw;
+    gap: 1vw;
+    height: 88vh;
+}
+
+.home {
+    height: 85vh;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    /* Dos filas */
+    grid-template-areas:
+        "config-reco config-notif"
+}
+
+.config-reco {
+    grid-area: config-reco;
+}
+
+.config-notif {
+    grid-area: config-notif;
+}
+
+.config-reco,
+.config-notif {
+    display: flex;
+    flex-direction: column;
+    /* Alineación horizontal */
+    gap: 0.2rem;
+    /* Espaciado entre los elementos */
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 2rem;
+}
+
+.main-content.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content .home {
+    background-color: var(--white);
+    width: 85%;
+    max-width: 85vw;
+    text-align: left;
+    /* Alineación como una página de Word */
+    border-radius: 8px;
+    gap: 1vw;
+}
+
+/* elementos bonitos */
+
+select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1vw;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: var(--gray);
+}
+
+.button {
+    cursor: pointer;
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 0.5vw;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 1vw;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: var(--secondary-color);
+}
+
+/*table*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+caption {
+    font-weight: bold;
+}
+
+caption,
+th,
+td {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    text-align: center;
+    max-width: 100%;
+    word-break: break-word;
+    /* Divide palabras largas si es necesario */
+    overflow-wrap: break-word;
+    /* Asegura compatibilidad para palabras largas */
+}
+
+th,
+caption {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/*end table*/
+/*------------------------------*/
+.profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropdown-item {
+    border-bottom: .1rem solid var(--primary-color);
+    padding-bottom: 10px;
+    width: 100%;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+    /* Elimina la línea del último enlace */
+}
+
+.dropdown-menu {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--secondary2-color);
+    position: absolute;
+    top: 65px;
+    right: 0%;
+    width: 30%;
+    padding: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.active {
+    display: flex;
+}
+
+.menu-toggle-p {
+    display: block;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.7rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+
+/* Pantallas medianas (tablets) */
+@media screen and (max-width: 768px) {
+
+    .dropdown-menu {
+        width: 60%;
+    }
+
+    .main-content.centered {
+        padding-top: 1rem;
+    }
+
+    .main-content {
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .main-content .home {
+        gap: 2vw;
+    }
+
+    .main-content {
+        -webkit-overflow-scrolling: touch;
+        /* Mejora la fluidez del scroll */
+    }
+
+    .config-reco,
+    .config-notif {
+        background-color: var(--white);
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding: 2rem;
+    }
+
+    .home {
+        height: 85vh;
+        display: grid;
+        grid-template-columns: 100%;
+        /* Dos filas */
+        grid-template-areas:
+            "config-reco"
+            "config-notif"
+    }
+
+    /* Botón y menú inicial */
+
+
+    .nav-item {
+        border-bottom: .1rem solid var(--primary-color);
+        padding-bottom: 10px;
+        width: 100%
+    }
+
+    .nav-item:last-child {
+        border-bottom: none;
+        /* Elimina la línea del último enlace */
+    }
+
+    .nav-links {
+        display: none;
+        /* Oculta enlaces inicialmente */
+        flex-direction: column;
+        /* Coloca los enlaces verticalmente */
+        gap: 10px;
+        background-color: var(--secondary2-color);
+        position: absolute;
+        top: 65px;
+        /* Debajo de la barra */
+        right: 0%;
+        /* Ajusta el espacio desde la derecha */
+        width: 60%;
+        /* Limita el ancho al 60% */
+        padding: 10px 0;
+        border-radius: 5px;
+        /* Opcional: esquinas redondeadas */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Opcional: sombra para estilo */
+    }
+
+    .nav-links.active {
+        display: flex;
+        /* Muestra el menú cuando está activo */
+    }
+
+    .menu-toggle {
+        display: block;
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .menu-container {
+        display: none;
+        /* Oculta el menú por defecto */
+        background-color: #f8f9fa;
+        padding: 10px;
+        border: 1px solid #ddd;
+        position: absolute;
+        /* Para manejar mejor el diseño */
+        top: 50px;
+        /* Ajusta según el botón */
+        left: 0;
+        width: 200px;
+        z-index: 1000;
+    }
+
+    .menu-item {
+        display: block;
+        padding: 10px;
+        color: #000;
+        text-decoration: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .menu-item:hover {
+        background-color: #007BFF;
+        color: white;
+    }
+
+
+}
+
+/* Pantallas pequeñas (móviles) */
+@media screen and (max-width: 560px) {
+    .main-content {
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .main-content .home {
+        gap: 2vw;
+    }
+
+    .main-content {
+        -webkit-overflow-scrolling: touch;
+    }
+
+}

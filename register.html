@@ -6,88 +6,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="logo_blanco.png" type="image/x-icon">
+	<link rel="icon" href="logo_blanco.png" type="image/x-icon">
     <title>Registrarse</title>
 </head>
 
 <body>
     <div id="container" class="container">
 
-        <div id="notification" class="hidden">
-            <img id="notification-icon" src="logo_blanco.png" style="width: 30px; height: 30px; margin-right: 10px;">
-            <span id="notification-message">Mensaje de notificación</span>
-        </div>
+		<!-- CONTENT SECTION -->
+		<div class="row content-row">
+			<!-- SIGN IN CONTENT -->
+			<div class="col align-items-center flex-col">
+				<div class="text">
+					<h2>Bienvenido</h2>
+					<p>
+						Somos tu aliado para un hogar eficiente y sostenible. Aquí encontrarás consejos prácticos y herramientas para optimizar el consumo de energía en cada rincón de tu hogar. Aprende a reducir gastos y hacer un uso más consciente de tus electrodomésticos y dispositivos eléctricos. Con nosotros, ahorrar energía es fácil y accesible para todos. ¡Empieza hoy a construir un futuro más verde y responsable!
+					</p>
+					<div class="img">
+						<img src="logo_blanco.png" alt="welcome">
+					</div>
+				</div>
+			</div>
+			<!-- FORM COLUMN -->
+			<div class="col align-items-center flex-col">
+				<div class="form-wrapper align-items-center">
+					<div class="form">
+						<form action="http://localhost:3000/registrar" method="POST">
+							<!-- Campo de usuario -->
+							<div class="input-group">
+								<i class='bx bxs-user'></i>
+								<input 
+									type="text" 
+									name="usuario" 
+									placeholder="Usuario" 
+									required 
+									minlength="3" 
+									maxlength="20" 
+									pattern="[A-Za-z0-9]+" 
+									title="El nombre de usuario debe contener entre 3 y 20 caracteres alfanuméricos">
+							</div>
+						
+							<!-- Campo de correo -->
+							<div class="input-group">
+								<i class='bx bx-mail-send'></i>
+								<input 
+									type="email" 
+									name="correo" 
+									placeholder="Correo" 
+									required 
+									maxlength="50" 
+									title="Introduce un correo válido, como ejemplo@email.com">
+							</div>
+						
+							<!-- Campo de contraseña -->
+							<div class="input-group">
+								<i class='bx bxs-lock-alt'></i>
+								<input 
+									type="password" 
+									name="contrasena" 
+									placeholder="Contraseña" 
+									required 
+									minlength="6" 
+									maxlength="20" 
+									title="La contraseña debe tener entre 6 y 20 caracteres">
+							</div>
+						
+							<!-- Botón de registro -->
+							<button type="submit" class="btn-redirect">Registrarse</button>
+						</form>						
+						
+						<p>
+							<span>¿Ya tienes una cuenta?</span>
+							<b class="pointer" id="iniciar">Inicia sesión aquí</b>
+						</p>
+					</div>
+				</div>
+			</div>
+			<!-- END SIGN IN CONTENT -->
+		</div>
+		<!-- END CONTENT SECTION -->
+	</div>
 
-
-        <div class="row content-row">
-
-            <div class="col align-items-center flex-col">
-                <div class="text animar">
-                    <h2>Bienvenido</h2>
-                    <p>
-                        Somos tu aliado para un hogar eficiente y sostenible. Aquí encontrarás consejos prácticos y herramientas para optimizar el consumo de energía en cada rincón de tu hogar. Aprende a reducir gastos y hacer un uso más consciente de tus electrodomésticos y dispositivos eléctricos. Con nosotros, ahorrar energía es fácil y accesible para todos. ¡Empieza hoy a construir un futuro más verde y responsable!
-                    </p>
-                    <div class="img animar">
-                        <img src="logo_blanco.png" alt="welcome">
-                    </div>
-                </div>
-            </div>
-
-            <div class="col align-items-center flex-col">
-                <div class="form-wrapper align-items-center">
-                    <div class="form animar">
-
-                        <form action="registro.php" method="POST">
-                            <div class="input-group">
-                                <i class='bx bxs-user'></i>
-                                <input type="text" name="usuario" placeholder="Usuario" required>
-                            </div>
-                            <div class="input-group">
-                                <i class='bx bx-mail-send'></i>
-                                <input type="email" name="correo" placeholder="Correo" required>
-                            </div>
-                        
-                            <div class="input-group">
-                                <i class='bx bx-phone'></i>
-                                <input type="tel" name="telefono" placeholder="Teléfono" required pattern="[0-9]{10}">
-                            </div>
-                        
-                            <div class="input-group">
-                                <i class='bx bxs-lock-alt'></i>
-                                <input type="password" name="contraseña" placeholder="Contraseña" required>
-                            </div>
-                        
-                            <button type="submit" class="btn-redirect">Registrarse</button>
-                        </form>
-                        <p>
-                            <span>¿Ya tienes una cuenta?</span>
-                            <b class="pointer" id="iniciar">Inicia sesión aquí</b>
-                        </p>
-                    </div>
-                </div>
-                <div class="form-wrapper">
-                    <div class="social-list align-items-center animar">
-                        <div class="align-items-center facebook-bg">
-                            <i class='bx bxl-facebook'></i>
-                        </div>
-                        <div class="align-items-center google-bg">
-                            <i class='bx bxl-google'></i>
-                        </div>
-                        <div class="align-items-center twitter-bg">
-                            <i class='bx bxl-twitter'></i>
-                        </div>
-                        <div class="align-items-center insta-bg">
-                            <i class='bx bxl-instagram-alt'></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="mensaje.js"></script>
+	<script src="mensaje.js"></script>
     <script src="script.js"></script>
-    <script src="botones.js"></script>
 </body>
 
 </html>
