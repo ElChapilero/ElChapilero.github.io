@@ -178,6 +178,16 @@ img {
 /* Pantallas medianas (tablets) */
 @media screen and (max-width: 768px) {
 
+    .container {
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .main-content {
+        -webkit-overflow-scrolling: touch;
+        /* Mejora la fluidez del scroll */
+    }
+
     .desc {
         display: none;
     }
