@@ -76,6 +76,12 @@ body {
     cursor: pointer;
 }
 
+a {
+    text-decoration: none; /* Elimina la línea de subrayado */
+    color: var(--black);
+    font-weight: bold;
+}
+
 /*acomoda el input en una posicion*/
 .input-group {
     position: relative;
