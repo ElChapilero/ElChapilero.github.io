@@ -32,14 +32,24 @@ app.post('/registrar', async (req, res) => {
     const { usuario, correo, contrasena } = req.body;
 
     try {
-        // Cambia "cuentas" por "usuarios" en la query
-        const query = 'INSERT INTO usuarios (nombre_usuario, correo, "contraseña") VALUES ($1, $2, $3)';
-        const values = [usuario, correo, contrasena];
-        await client.query(query, values);
-        console.log(`¡Registro exitoso! para el usuario: ${usuario}`);
-        res.redirect('sign_in.html');
+        // Verificar si el correo ya existe
+        const checkQuery = 'SELECT * FROM usuarios WHERE correo = $1';
+        const checkValues = [correo];
+        const checkResult = await client.query(checkQuery, checkValues);
+
+        if (checkResult.rows.length > 0) {
+            console.log('El correo ya está registrado:', correo);
+            res.status(400).send('El correo ya está registrado'); // Muestra error si el correo ya existe
+        } else {
+            // Insertar el nuevo usuario si el correo no está registrado
+            const query = 'INSERT INTO usuarios (nombre_usuario, correo, "contraseña") VALUES ($1, $2, $3)';
+            const values = [usuario, correo, contrasena];
+            await client.query(query, values);
+            console.log(`¡Registro exitoso! para el usuario: ${usuario}`);
+            res.redirect('sign_in.html');
+        }
     } catch (err) {
-        console.error('Error al insertar datos:', err);
+        console.error('Error al procesar el registro:', err);
         res.status(500).send('Error al registrar usuario');
     }
 });

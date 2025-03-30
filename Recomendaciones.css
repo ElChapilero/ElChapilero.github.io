@@ -382,17 +382,28 @@ tr:nth-child(even) {
 
 /* Pantallas pequeñas (móviles) */
 @media screen and (max-width: 560px) {
-    .main-content {
-        height: auto;
-        overflow-y: auto;
-    }
 
     .main-content .home {
-        gap: 2vw;
+        width: 95%;
+        max-width: 95vw;
+        gap: 1vw;
     }
 
-    .main-content {
-        -webkit-overflow-scrolling: touch;
+    .recommendations-section {
+        padding: 1rem;
+    }
+
+    caption, th, td {
+        padding: 1rem 0.5rem;
+        border: 1px solid #ccc;
+        text-align: center;
+        max-width: 100%;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    td, th{
+        font-size: 0.8rem;
     }
 
 }
