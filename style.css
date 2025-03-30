@@ -197,7 +197,7 @@ img {
         height: 100vh;
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 40% 60%;
+        grid-template-rows: 45% 60%;
         /* Dos filas */
         grid-template-areas:
             "col1"
