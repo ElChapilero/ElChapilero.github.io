@@ -2,93 +2,78 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="style.css">
 	<link rel="icon" href="logo_blanco.png" type="image/x-icon">
-    <title>Registrarse</title>
+	<title>Registrarse</title>
 </head>
 
 <body>
-    <div id="container" class="container">
-
-		<!-- CONTENT SECTION -->
-		<div class="content-row">
-			<!-- SIGN IN CONTENT -->
-			<div class="col1 align-items-center flex-col">
-				<div class="text">
-					<h2>Bienvenido</h2>
-					<p class="desc">
-						Somos tu aliado para un hogar eficiente y sostenible. Aquí encontrarás consejos prácticos y herramientas para optimizar el consumo de energía en cada rincón de tu hogar. Aprende a reducir gastos y hacer un uso más consciente de tus electrodomésticos y dispositivos eléctricos. Con nosotros, ahorrar energía es fácil y accesible para todos. ¡Empieza hoy a construir un futuro más verde y responsable!
-					</p>
-					<div class="img">
-						<img src="logo_blanco.png" alt="welcome">
-					</div>
+	<!-- CONTENT SECTION -->
+	<div class="content-row">
+		<!-- SIGN IN CONTENT -->
+		<div class="col1 align-items-center flex-col">
+			<div class="text">
+				<h2>Bienvenido</h2>
+				<p class="desc">
+					Somos tu aliado para un hogar eficiente y sostenible. Aquí encontrarás consejos prácticos y
+					herramientas para optimizar el consumo de energía en cada rincón de tu hogar. Aprende a reducir
+					gastos y hacer un uso más consciente de tus electrodomésticos y dispositivos eléctricos. Con
+					nosotros, ahorrar energía es fácil y accesible para todos. ¡Empieza hoy a construir un futuro más
+					verde y responsable!
+				</p>
+				<div class="img">
+					<img src="logo_blanco.png" alt="welcome">
 				</div>
 			</div>
-			<!-- FORM COLUMN -->
-			<div class="col2 align-items-center flex-col">
-				<div class="form-wrapper align-items-center">
-					<div class="form">
-						<form action="http://localhost:3000/registrar" method="POST">
-							<!-- Campo de usuario -->
-							<div class="input-group">
-								<i class='bx bxs-user'></i>
-								<input 
-									type="text" 
-									name="usuario" 
-									placeholder="Usuario" 
-									required 
-									minlength="3" 
-									maxlength="20" 
-									pattern="[A-Za-z0-9]+" 
-									title="El nombre de usuario debe contener entre 3 y 20 caracteres alfanuméricos">
-							</div>
-						
-							<!-- Campo de correo -->
-							<div class="input-group">
-								<i class='bx bx-mail-send'></i>
-								<input 
-									type="email" 
-									name="correo" 
-									placeholder="Correo" 
-									required 
-									maxlength="50" 
-									title="Introduce un correo válido, como ejemplo@email.com">
-							</div>
-						
-							<!-- Campo de contraseña -->
-							<div class="input-group">
-								<i class='bx bxs-lock-alt'></i>
-								<input 
-									type="password" 
-									name="contrasena" 
-									placeholder="Contraseña" 
-									required 
-									minlength="6" 
-									maxlength="20" 
-									title="La contraseña debe tener entre 6 y 20 caracteres">
-							</div>
-						
-							<!-- Botón de registro -->
-							<button type="submit" class="btn-redirect">Registrarse</button>
-						</form>						
-						
-						<p>
-							<span>¿Ya tienes una cuenta?</span>
-							<a class="pointer" id="iniciar" href="sign_in.html">Inicia sesión aquí</a>
-						</p>
-					</div>
-				</div>
-			</div>
-			<!-- END SIGN IN CONTENT -->
 		</div>
-		<!-- END CONTENT SECTION -->
+		<!-- FORM COLUMN -->
+		<div class="col2 align-items-center flex-col">
+			<div class="form-wrapper align-items-center">
+				<div class="form">
+					<form action="http://localhost:3000/registrar" method="POST">
+						<!-- Campo de usuario -->
+						<div class="input-group">
+							<i class='bx bxs-user'></i>
+							<input type="text" name="usuario" placeholder="Usuario" required minlength="3"
+								maxlength="20" pattern="[A-Za-z0-9]+"
+								title="El nombre de usuario debe contener entre 3 y 20 caracteres alfanuméricos">
+						</div>
+
+						<!-- Campo de correo -->
+						<div class="input-group">
+							<i class='bx bx-mail-send'></i>
+							<input type="email" name="correo" placeholder="Correo" required maxlength="50"
+								title="Introduce un correo válido, como ejemplo@email.com">
+						</div>
+
+						<!-- Campo de contraseña -->
+						<div class="input-group">
+							<i class='bx bxs-lock-alt'></i>
+							<input type="password" name="contrasena" placeholder="Contraseña" required minlength="6"
+								maxlength="20" title="La contraseña debe tener entre 6 y 20 caracteres">
+						</div>
+
+						<!-- Botón de registro -->
+						<button type="submit" class="btn-redirect">Registrarse</button>
+					</form>
+
+					<p>
+						<span>¿Ya tienes una cuenta?</span>
+						<a class="pointer" id="iniciar" href="sign_in.html">Inicia sesión aquí</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- END SIGN IN CONTENT -->
 	</div>
+	<!-- END CONTENT SECTION -->
+
 
 	<script src="mensaje.js"></script>
-    <script src="script.js"></script>
+	<script src="script.js"></script>
 </body>
 
 </html>
