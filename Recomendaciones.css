@@ -50,9 +50,9 @@ h3 {
 
 html,
 body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    width: auto;
+    height: auto;
+    overflow: auto;
 }
 
 /* TITULOS */
@@ -126,11 +126,11 @@ body {
     display: flex;
     padding: 1vw;
     gap: 1vw;
-    height: 88vh;
+    height: auto;
 }
 
 .home {
-    height: 85vh;
+    height: auto;
     display: grid;
     grid-template-columns: 100%;
     /* Dos filas */
@@ -269,18 +269,8 @@ tr:nth-child(even) {
         padding-top: 1rem;
     }
 
-    .main-content {
-        height: auto;
-        overflow-y: auto;
-    }
-
     .main-content .home {
         gap: 2vw;
-    }
-
-    .main-content {
-        -webkit-overflow-scrolling: touch;
-        /* Mejora la fluidez del scroll */
     }
 
     .recommendations-section{
@@ -288,15 +278,6 @@ tr:nth-child(even) {
         border-radius: 8px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         padding: 2rem;
-    }
-
-    .home {
-        height: 85vh;
-        display: grid;
-        grid-template-columns: 100%;
-        /* Dos filas */
-        grid-template-areas:
-            "recommendations-section"
     }
 
     /* Botón y menú inicial */
@@ -387,6 +368,10 @@ tr:nth-child(even) {
         width: 95%;
         max-width: 95vw;
         gap: 1vw;
+    }
+
+    .home {
+        margin-bottom: 20px;
     }
 
     .recommendations-section {
