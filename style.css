@@ -20,18 +20,16 @@
 html,
 body {
     height: 100vh;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .container {
     position: relative;
     min-height: 100vh;
-    overflow: hidden;
 }
 
 /* fondo */
 .content-row {
-    height: 100vh;
     display: grid;
     grid-template-columns: 50% 50%;
     /* Dos filas */
@@ -145,6 +143,7 @@ span {
     left: 0;
     z-index: 6;
     width: 100%;
+    height: 100%;
 }
 
 .text {
@@ -179,25 +178,15 @@ img {
 /* Pantallas medianas (tablets) */
 @media screen and (max-width: 768px) {
 
-    .content-row {
-        height: auto;
-        overflow-y: auto;
-    }
-
-    .content-row {
-        -webkit-overflow-scrolling: touch;
-        /* Mejora la fluidez del scroll */
-    }
-
     .desc {
         display: none;
     }
 
     .content-row {
-        height: 100vh;
+        height: 100%;
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 45% 60%;
+        grid-template-rows: 40% 60%;
         /* Dos filas */
         grid-template-areas:
             "col1"
