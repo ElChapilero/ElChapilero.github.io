@@ -126,6 +126,29 @@ app.get('/obtenerElectrodomesticos/:idPerfilHogar', async (req, res) => {
     }
 });
 
+// insertar datos
+app.post('/insertarElectrodomestico', async (req, res) => {
+    const { idPerfilHogar, categoria, electrodomestico, watt } = req.body;
+
+    try {
+        const query = `
+            INSERT INTO electrodomesticos (id_perfil_hogar, nombre, watt, id_tp_electrodomestico)
+            VALUES (
+                $1,
+                $2,
+                $3,
+                (SELECT id_tp_electrodomestico FROM tipo_de_electrodomesticos WHERE nombre = $4)
+            );
+        `;
+        await client.query(query, [idPerfilHogar, electrodomestico, watt, categoria]); // Insertar los datos
+        console.log(`Electrodoméstico insertado: ${electrodomestico} en la categoría ${categoria}`);
+        res.status(200).json({ message: 'Electrodoméstico agregado correctamente' });
+    } catch (err) {
+        console.error('Error al insertar electrodoméstico:', err);
+        res.status(500).json({ error: 'Error al insertar electrodoméstico', detalle: err.message });
+    }
+});
+
 
 // Inicia el servidor
 app.listen(port, () => {

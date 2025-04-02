@@ -66,37 +66,28 @@
 
             <!-- Sección de Selección de Categoría de Electrodomésticos -->
             <div class="selection-section">
-                <h2>Categoría de Electrodoméstico</h2>
-                <select id="categoria-electrodomestico">
-                    <option value="Seleccionar">Seleccionar</option>
-                    <option value="Cocina">Cocina</option>
-                    <option value="Limpieza">Limpieza</option>
-                    <option value="Climatización">Climatización</option>
-                    <option value="Entretenimiento">Entretenimiento</option>
-                    <option value="Iluminación">Iluminación</option>
-                    <option value="Seguridad_y_automatización">Seguridad y automatización</option>
-                </select>
 
-                <h2>Electrodoméstico Específico</h2>
-                <select id="electrodomestico">
-                    <option value="Seleccionar">Seleccionar</option>
-                    <option value="Refrigerador">Refrigerador</option>
-                    <option value="Horno">Horno</option>
-                    <option value="Microondas">Microondas</option>
-                    <option value="Licuadora">Licuadora</option>
-                    <option value="Estufa">Estufa</option>
-                </select>
-
-                <h2>Consumo Aproximado (Watts)</h2>
-                <select id="electrodomestico">
-                    <option value="Seleccionar">Seleccionar</option>
-                    <option value="nevera">100 - 150</option>
-                    <option value="lavadora">151 - 200</option>
-                    <option value="aire-acondicionado">201 - 250</option>
-                    <option value="aire-acondicionado">251 - 300</option>
-                    <option value="aire-acondicionado">301 - 350</option>
-                </select>
-                <button class="button" id="Crear">Agregar Electrodoméstico</button>
+                <form id="formulario1">
+                    <h2>Categoría de Electrodoméstico</h2>
+                    <select id="categoria-electrodomestico">
+                        <option value="Seleccionar">Seleccionar</option>
+                        <option value="Cocina">Cocina</option>
+                        <option value="Limpieza">Limpieza</option>
+                        <option value="Climatización">Climatización</option>
+                        <option value="Entretenimiento">Entretenimiento</option>
+                        <option value="Iluminación">Iluminación</option>
+                        <option value="Seguridad_y_automatización">Seguridad y automatización</option>
+                    </select>
+                    
+                    <h2>Electrodoméstico Específico</h2>
+                    <select id="electrodomestico">
+                        <option value="Seleccionar">Seleccionar</option>
+                    </select>
+                
+                    <h2>Consumo Aproximado (Watts)</h2>
+                    <input type="number" placeholder="Watts" required>
+                    <button class="button" id="Crear">Agregar Electrodoméstico</button>
+                </form>
                 <button class="button" id="Eliminar">Eliminar Electrodoméstico</button>
             </div>
 
@@ -111,14 +102,13 @@
                         </tr>
                     </thead>
                     <tbody id="tabla-datos">
-                        <!-- Las filas se llenarán aquí -->
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-    <script src="selec_tabla.js"></script>
+    <script src="captura_elec.js"></script>
+    <script src="electrodo_categoria.js"></script>
     <script src="lista_hogares.js"></script>
     <script src="crear_hogar.js"></script>
     <script src="menuperfil.js"></script>
