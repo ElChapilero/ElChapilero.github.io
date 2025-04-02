@@ -138,10 +138,7 @@ span {
 
 /*hace que los elementos no desaparescan con el fondo puesto*/
 .content-row {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 6;
+    position: relative;
     width: 100%;
     height: 100%;
 }
@@ -236,5 +233,8 @@ img {
     b,
     span {
         font-size: 0.8rem;
+    }
+    .content-row {
+        margin-bottom: 20px;
     }
 }
