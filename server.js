@@ -1,11 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session'); // Importa express-session
 const { Client } = require('pg');
 
 const app = express();
 const port = 3000;
 
 app.use(express.static(__dirname));
+
+// Middleware para procesar datos del formulario
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Configuración de sesiones
+app.use(session({
+    secret: 'tu_secreto_unico', // Cambia por un valor único y seguro
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Cambia a `true` si estás usando HTTPS
+}));
 
 // Configuración de PostgreSQL
 const client = new Client({
@@ -20,10 +33,6 @@ const client = new Client({
 client.connect()
     .then(() => console.log('¡Conexión exitosa a PostgreSQL!'))
     .catch(err => console.error('Error al conectar a PostgreSQL:', err));
-
-// Middleware para procesar datos del formulario
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 // Registro de usuarios
 app.post('/registrar', async (req, res) => {
@@ -48,7 +57,7 @@ app.post('/registrar', async (req, res) => {
     }
 });
 
-// Inicio de sesión
+// Ruta de inicio de sesión
 app.post('/login', async (req, res) => {
     const { usuario, contrasena } = req.body;
 
@@ -57,8 +66,9 @@ app.post('/login', async (req, res) => {
         const result = await client.query(query, [usuario, contrasena]);
 
         if (result.rows.length > 0) {
-            console.log(`Inicio de sesión exitoso para el usuario: ${usuario}`);
-            res.redirect('index.html');
+            req.session.usuario = result.rows[0]; // Guarda los datos del usuario en la sesión
+            console.log('Información de sesión:', req.session.usuario);
+            res.redirect('/index.html');
         } else {
             console.log('Usuario o contraseña incorrectos');
             res.status(401).send('Usuario o contraseña incorrectos');
@@ -66,6 +76,15 @@ app.post('/login', async (req, res) => {
     } catch (err) {
         console.error('Error al iniciar sesión:', err);
         res.status(500).send('Error al iniciar sesión');
+    }
+});
+
+// Ruta del perfil
+app.get('/perfil', (req, res) => {
+    if (req.session.usuario) {
+        res.send(`Bienvenido, ${req.session.usuario.nombre_usuario}`);
+    } else {
+        res.status(401).send('No has iniciado sesión');
     }
 });
 
