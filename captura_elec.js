@@ -16,7 +16,7 @@ formulario.addEventListener('submit', (event) => {
 
     // Validar que los campos tengan datos válidos
     if (idPerfilHogar === "Seleccionar" || categoria === "Seleccionar" || electrodomestico === "Seleccionar" || !watt) {
-        alert('Por favor, completa todos los campos antes de continuar.');
+        showNotification('¡Por favor, completa todos los campos antes de continuar!');
         return;
     }
 
@@ -34,10 +34,10 @@ formulario.addEventListener('submit', (event) => {
         })
         .then(data => {
             console.log('Respuesta del servidor:', data);
-            alert('Electrodoméstico agregado correctamente');
+            showNotification('¡Electrodoméstico agregado correctamente!');
         })
         .catch(error => {
             console.error('Error al enviar los datos:', error);
-            alert('Ocurrió un error al agregar el electrodoméstico.');
+            showNotification('¡Ocurrió un error al agregar el electrodoméstico!');
         });
 });

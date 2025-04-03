@@ -88,7 +88,7 @@ app.get('/perfil', (req, res) => {
     }
 });
 
-// crear perfil
+// crear perfil de hogar
 app.post('/insertarPerfil', async (req, res) => {
     // Obtenemos el ID del usuario desde la sesión
     const idUsuario = req.session.usuario?.id_usuario; // Accede al id_usuario desde la sesión
