@@ -71,10 +71,10 @@ logoutBtn.addEventListener("click", (event) => {
             registerBtn.style.display = 'block'; // Mostrar "Crear Cuenta"
             logoutBtn.style.display = 'none'; // Ocultar "Cerrar Sesión"
             dropdownMenu.classList.remove('active'); // Cerrar el menú desplegable
-            alert('Has cerrado sesión exitosamente.');
+            showNotification(`¡Has cerrado sesión exitosamente!`);
         })
         .catch(error => {
             console.error('Error al cerrar la sesión:', error);
-            alert('Ocurrió un error al cerrar la sesión.');
+            showNotification(`¡Ocurrió un error al cerrar la sesión!`);
         });
 });

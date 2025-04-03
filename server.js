@@ -68,14 +68,14 @@ app.post('/login', async (req, res) => {
         if (result.rows.length > 0) {
             req.session.usuario = result.rows[0]; // Guarda los datos del usuario en la sesión
             console.log('Información de sesión:', req.session.usuario);
-            res.redirect('/index.html');
+            res.status(200).json({ message: 'Inicio de sesión exitoso', usuario: result.rows[0].nombre_usuario });
         } else {
             console.log('Usuario o contraseña incorrectos');
-            res.status(401).send('Usuario o contraseña incorrectos');
+            res.status(401).json({ message: 'Usuario o contraseña incorrectos' });
         }
     } catch (err) {
         console.error('Error al iniciar sesión:', err);
-        res.status(500).send('Error al iniciar sesión');
+        res.status(500).json({ message: 'Error al iniciar sesión' });
     }
 });
 
