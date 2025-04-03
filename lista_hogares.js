@@ -3,8 +3,7 @@ const selectHogar = document.getElementById('tipo-hogar');
 const tablaDatos = document.getElementById('tabla-datos');
 
 // Cargar perfiles en el <select>
-const idUsuario = 1; // ID del usuario actual
-fetch(`http://localhost:3000/obtenerPerfiles/${idUsuario}`)
+fetch(`http://localhost:3000/obtenerPerfiles`)
   .then(response => {
     if (!response.ok) {
       throw new Error('Error al obtener los perfiles del backend');

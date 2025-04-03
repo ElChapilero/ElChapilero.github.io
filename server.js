@@ -90,7 +90,15 @@ app.get('/perfil', (req, res) => {
 
 // crear perfil
 app.post('/insertarPerfil', async (req, res) => {
-    const { idUsuario, nombre } = req.body;
+    // Obtenemos el ID del usuario desde la sesión
+    const idUsuario = req.session.usuario?.id_usuario; // Accede al id_usuario desde la sesión
+    const { nombre } = req.body; // El nombre del perfil viene del cliente
+
+    if (!idUsuario) {
+        // Si no hay usuario en sesión, devolvemos un error
+        return res.status(401).json({ error: 'No has iniciado sesión' });
+    }
+
     console.log('Datos recibidos en el backend:', { idUsuario, nombre });
 
     try {
@@ -107,9 +115,16 @@ app.post('/insertarPerfil', async (req, res) => {
         res.status(500).json({ error: 'Error al insertar datos' });
     }
 });
+
 // llamada de los perfiles de hogar
-app.get('/obtenerPerfiles/:idUsuario', async (req, res) => {
-    const { idUsuario } = req.params;
+app.get('/obtenerPerfiles', async (req, res) => {
+    // Obtenemos el ID del usuario desde la sesión
+    const idUsuario = req.session.usuario?.id_usuario;
+
+    if (!idUsuario) {
+        // Si no hay usuario en sesión, devolvemos un error
+        return res.status(401).json({ error: 'No has iniciado sesión' });
+    }
 
     try {
         const query = `
@@ -127,7 +142,7 @@ app.get('/obtenerPerfiles/:idUsuario', async (req, res) => {
 
 // electrodomesticos segun tp hogar
 app.get('/obtenerElectrodomesticos/:idPerfilHogar', async (req, res) => {
-    const { idPerfilHogar } = req.params; // Obtener el id_perfil_hogar desde la URL
+    const { idPerfilHogar } = req.params;
 
     try {
         const query = `
@@ -145,11 +160,29 @@ app.get('/obtenerElectrodomesticos/:idPerfilHogar', async (req, res) => {
     }
 });
 
-// insertar datos
+// insertar datos de electrodomestico
 app.post('/insertarElectrodomestico', async (req, res) => {
     const { idPerfilHogar, categoria, electrodomestico, watt } = req.body;
 
+    // Validar que el usuario esté en sesión
+    const idUsuario = req.session.usuario?.id_usuario;
+    if (!idUsuario) {
+        return res.status(401).json({ error: 'No has iniciado sesión' });
+    }
+
     try {
+        // Verificar que el perfil de hogar pertenece al usuario autenticado
+        const checkQuery = `
+            SELECT 1 
+            FROM perfil_hogar 
+            WHERE id_perfil_hogar = $1 AND id_usuario = $2;
+        `;
+        const checkResult = await client.query(checkQuery, [idPerfilHogar, idUsuario]);
+        if (checkResult.rows.length === 0) {
+            return res.status(403).json({ error: 'El perfil de hogar no pertenece al usuario autenticado' });
+        }
+
+        // Insertar el electrodoméstico en el perfil de hogar
         const query = `
             INSERT INTO electrodomesticos (id_perfil_hogar, nombre, watt, id_tp_electrodomestico)
             VALUES (
@@ -159,7 +192,7 @@ app.post('/insertarElectrodomestico', async (req, res) => {
                 (SELECT id_tp_electrodomestico FROM tipo_de_electrodomesticos WHERE nombre = $4)
             );
         `;
-        await client.query(query, [idPerfilHogar, electrodomestico, watt, categoria]); // Insertar los datos
+        await client.query(query, [idPerfilHogar, electrodomestico, watt, categoria]);
         console.log(`Electrodoméstico insertado: ${electrodomestico} en la categoría ${categoria}`);
         res.status(200).json({ message: 'Electrodoméstico agregado correctamente' });
     } catch (err) {
@@ -167,7 +200,6 @@ app.post('/insertarElectrodomestico', async (req, res) => {
         res.status(500).json({ error: 'Error al insertar electrodoméstico', detalle: err.message });
     }
 });
-
 
 // Inicia el servidor
 app.listen(port, () => {

@@ -1,23 +1,21 @@
-// Capturar elementos del formulario y campos
 const formulario = document.getElementById('formulario1');
+const perfilSelect = document.getElementById('tipo-hogar'); // Select para el perfil de hogar
 const categoriaSelect = document.getElementById('categoria-electrodomestico');
 const electrodomesticoSelect = document.getElementById('electrodomestico');
 const consumoInput = document.querySelector('input[placeholder="Watts"]');
 
-// ID del perfil de hogar (puede ser dinámico)
-const idPerfilHogar = 1; // Para pruebas, este ID debe ser el perfil seleccionado por el usuario
-
 // Detectar el envío del formulario
 formulario.addEventListener('submit', (event) => {
-    event.preventDefault(); // Prevenir el envío del formulario por defecto
+    event.preventDefault(); // Prevenir el envío por defecto
 
     // Obtener los valores seleccionados y el consumo
+    const idPerfilHogar = perfilSelect.value; // ID dinámico del perfil seleccionado
     const categoria = categoriaSelect.value;
     const electrodomestico = electrodomesticoSelect.value;
     const watt = consumoInput.value;
 
     // Validar que los campos tengan datos válidos
-    if (categoria === "Seleccionar" || electrodomestico === "Seleccionar" || !watt) {
+    if (idPerfilHogar === "Seleccionar" || categoria === "Seleccionar" || electrodomestico === "Seleccionar" || !watt) {
         alert('Por favor, completa todos los campos antes de continuar.');
         return;
     }
