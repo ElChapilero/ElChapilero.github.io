@@ -11,6 +11,11 @@
 </head>
 
 <body>
+	<!-- Notificacion -->
+    <div id="notification" class="hidden">
+        <img id="notification-icon" src="logo_blanco.png" alt="Ícono de notificación">
+        <span id="notification-message"></span>
+    </div>
 	<!-- CONTENT SECTION -->
 	<div  id="container" class="content-row">
 		<!-- SIGN IN CONTENT -->
@@ -33,32 +38,28 @@
 		<div class="col2 align-items-center flex-col">
 			<div class="form-wrapper align-items-center">
 				<div class="form">
-					<form action="http://localhost:3000/registrar" method="POST">
+					<form id="formulario">
 						<!-- Campo de usuario -->
 						<div class="input-group">
 							<i class='bx bxs-user'></i>
-							<input type="text" name="usuario" placeholder="Usuario" required minlength="3"
-								maxlength="20" pattern="[A-Za-z0-9]+"
-								title="El nombre de usuario debe contener entre 3 y 20 caracteres alfanuméricos">
+							<input type="text" name="usuario" id="usuario" placeholder="Usuario" required minlength="3"
+								maxlength="20" pattern="[A-Za-z0-9]+" title="El nombre de usuario debe contener entre 3 y 20 caracteres alfanuméricos">
 						</div>
-
 						<!-- Campo de correo -->
 						<div class="input-group">
 							<i class='bx bx-mail-send'></i>
-							<input type="email" name="correo" placeholder="Correo" required maxlength="50"
+							<input type="email" name="correo" id="correo" placeholder="Correo" required maxlength="50"
 								title="Introduce un correo válido, como ejemplo@email.com">
 						</div>
-
 						<!-- Campo de contraseña -->
 						<div class="input-group">
 							<i class='bx bxs-lock-alt'></i>
-							<input type="password" name="contrasena" placeholder="Contraseña" required minlength="6"
+							<input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required minlength="6"
 								maxlength="20" title="La contraseña debe tener entre 6 y 20 caracteres">
 						</div>
-
 						<!-- Botón de registro -->
 						<button type="submit" class="btn-redirect">Registrarse</button>
-					</form>
+					</form>					
 
 					<p>
 						<span>¿Ya tienes una cuenta?</span>
@@ -70,8 +71,8 @@
 		<!-- END SIGN IN CONTENT -->
 	</div>
 	<!-- END CONTENT SECTION -->
-
-
+	<script src="noti_registro.js"></script>
+	<script src="notificacion.js"></script>
 	<script src="mensaje.js"></script>
 	<script src="script.js"></script>
 </body>

@@ -159,7 +159,53 @@ img {
     /* Ajusta imágenes al contenedor */
     height: auto;
 }
+/* Estilo general de la notificación */
+#notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    font-size: 18px;
+    text-align: left;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 90%;
+    min-width: 200px;
+    height: auto;
+    transition: opacity 0.5s ease-in-out;
+}
 
+/* Imagen de la notificación */
+#notification-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/* Mensaje de la notificación */
+#notification-message {
+    flex: 1;
+    word-wrap: break-word;
+}
+
+/* Ocultar notificación */
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* Mostrar notificación */
+.visible {
+    visibility: visible;
+    opacity: 1;
+}
 
 /* Pantallas medianas (tablets) */
 @media screen and (max-width: 768px) {

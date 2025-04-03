@@ -44,16 +44,16 @@ app.post('/registrar', async (req, res) => {
 
         if (checkResult.rows.length > 0) {
             console.log('El correo ya está registrado:', correo);
-            res.status(400).send('El correo ya está registrado'); 
+            return res.status(400).json({ message: 'El correo ya está registrado' });
         } else {
             const query = 'INSERT INTO usuarios (nombre_usuario, correo, "contraseña") VALUES ($1, $2, $3)';
             await client.query(query, [usuario, correo, contrasena]);
             console.log(`¡Registro exitoso para el usuario: ${usuario}!`);
-            res.redirect('sign_in.html');
+            res.status(200).json({ message: '¡Registro exitoso!' });
         }
     } catch (err) {
         console.error('Error al registrar usuario:', err);
-        res.status(500).send('Error al registrar usuario');
+        res.status(500).json({ message: 'Error al registrar usuario' });
     }
 });
 
