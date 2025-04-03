@@ -201,6 +201,27 @@ app.post('/insertarElectrodomestico', async (req, res) => {
     }
 });
 
+// estado de sesión y nombre del usuario
+app.get('/checkSession', (req, res) => {
+    if (req.session.usuario) {
+        res.json({ isLoggedIn: true, nombreUsuario: req.session.usuario.nombre_usuario });
+    } else {
+        res.json({ isLoggedIn: false });
+    }
+});
+
+// cerrar sesion
+app.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Error al cerrar la sesión:', err);
+            return res.status(500).json({ error: 'Error al cerrar la sesión' });
+        }
+        res.json({ message: 'Sesión cerrada exitosamente' });
+    });
+});
+
+
 // Inicia el servidor
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
