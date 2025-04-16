@@ -25,46 +25,47 @@ fetch(`http://localhost:3000/obtenerPerfiles`)
     console.error('Error al cargar los perfiles:', error);
   });
 
-// Detectar cambios en el <select>
+// Detectar cambios en el <select> y cargar electrodomésticos
 selectHogar.addEventListener('change', () => {
-    const idPerfilHogar = selectHogar.value; // Obtener el id del perfil seleccionado
-    console.log('Perfil de hogar seleccionado:', idPerfilHogar);
+  const idPerfilHogar = selectHogar.value;
 
-    if (idPerfilHogar === "Seleccionar") {
-        console.log('No se seleccionó un perfil válido, limpiando la tabla.');
-        tablaDatos.innerHTML = '';
-        return;
-    }
+  if (!idPerfilHogar) {
+    tablaDatos.innerHTML = '';
+    return;
+  }
 
-    // Solicitar los datos de electrodomésticos al backend
-    fetch(`http://localhost:3000/obtenerElectrodomesticos/${idPerfilHogar}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al obtener los electrodomésticos');
-            }
-            return response.json();
-        })
-        .then(electrodomesticos => {
-            console.log('Datos obtenidos del backend:', electrodomesticos);
+  fetch(`http://localhost:3000/obtenerElectrodomesticos/${idPerfilHogar}`)
+    .then(response => {
+      if (!response.ok) throw new Error('Error al obtener los electrodomésticos');
+      return response.json();
+    })
+    .then(electrodomesticos => {
+      tablaDatos.innerHTML = '';
+      electrodomesticos.forEach((dato, index) => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${dato.categoria}</td>
+          <td>${dato.electrodomestico}</td>
+          <td>${dato.consumo}</td>
+          <td><button class="delete-button">❌</button></td>
+        `;
+        tablaDatos.appendChild(fila);
 
-            // Limpiar la tabla antes de llenarla
-            tablaDatos.innerHTML = '';
-
-            // Llenar la tabla con los datos obtenidos
-            electrodomesticos.forEach((dato, index) => {
-                console.log(`Procesando fila ${index + 1}:`, dato);
-                const fila = document.createElement('tr');
-                fila.innerHTML = `
-                    <td>${dato.categoria}</td>
-                    <td>${dato.electrodomestico}</td>
-                    <td>${dato.consumo}</td>
-                `;
-                tablaDatos.appendChild(fila); // Agregar la fila al tbody
+        fila.querySelector('.delete-button').addEventListener('click', () => {
+          fetch(`http://localhost:3000/eliminarElectrodomestico/${dato.id_electrodomestico}`, { method: 'DELETE' })
+            .then(response => {
+              if (!response.ok) throw new Error('Error al eliminar el electrodoméstico');
+              fila.remove();
+              console.log('Electrodoméstico eliminado correctamente');
+              showNotification('Electrodoméstico eliminado correctamente');
+            })
+            .catch(error => {
+              console.error('Error al eliminar el electrodoméstico del backend:', error);
             });
-
-            console.log('Tabla actualizada con los datos del perfil seleccionado.');
-        })
-        .catch(error => {
-            console.error('Error al cargar los electrodomésticos:', error);
         });
+      });
+    })
+    .catch(error => {
+      console.error('Error al cargar los electrodomésticos:', error);
+    });
 });

@@ -1,11 +1,11 @@
 // Listas de electrodomésticos por categoría
 const electrodomesticosPorCategoria = {
-    Cocina: ["Refrigerador", "Horno", "Microondas", "Licuadora", "Estufa"],
-    Limpieza: ["Lavadora", "Secadora", "Aspiradora", "Plancha"],
-    Climatización: ["Aire acondicionado", "Ventilador", "Calefactor", "Deshumidificador"],
-    Entretenimiento: ["Televisor", "Consola de videojuegos", "Equipo de sonido"],
-    Iluminación: ["Lámpara de mesa", "Foco LED", "Lámpara de pie", "Panel solar"],
-    Seguridad_y_automatización: ["Cámara de seguridad", "Sensor de movimiento", "Timbre inteligente"]
+    1: ["Refrigerador", "Horno", "Microondas", "Licuadora", "Estufa"],
+    2: ["Lavadora", "Secadora", "Aspiradora", "Plancha"],
+    3: ["Aire acondicionado", "Ventilador", "Calefactor", "Deshumidificador"],
+    4: ["Televisor", "Consola de videojuegos", "Equipo de sonido"],
+    5: ["Lámpara de mesa", "Foco LED", "Lámpara de pie", "Panel solar"],
+    6: ["Cámara de seguridad", "Sensor de movimiento", "Timbre inteligente"]
 };
 
 // Detectar cambios en la categoría seleccionada y actualizar el `<select>` de electrodomésticos

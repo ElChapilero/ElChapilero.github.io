@@ -14,7 +14,7 @@
     <div id="notification" class="hidden">
         <img id="notification-icon" src="Image/logo_blanco.png" alt="Ícono de notificación">
         <span id="notification-message"></span>
-    </div>       
+    </div>
     <!-- Primera Barra de Navegación -->
     <nav class="navbar">
         <div class="nav-container">
@@ -40,7 +40,7 @@
                 <a id="login-btn" class="dropdown-item" href="sign_in.html">Iniciar Sesión</a>
                 <a id="register-btn" class="dropdown-item" href="register.html">Crear Cuenta</a>
                 <a id="logout-btn" class="dropdown-item" href="sign_in.html" style="display: none;">Cerrar Sesión</a>
-            </div>           
+            </div>
         </div>
 
     </nav>
@@ -63,9 +63,12 @@
                     <button type="submit" class="button">Crear perfil de hogar</button>
                 </form>
                 <h2>Selecciona tu Hogar</h2>
-                <select id="tipo-hogar">
-                    <option value="Seleccionar">Seleccionar</option>
-                </select>
+                <form id="perfil-form">
+                    <select id="tipo-hogar">
+                        <option value="Seleccionar">Seleccionar</option>
+                    </select>
+                    <button class="button" type="submit">Eliminar Perfil</button>
+                </form>
             </div>
 
             <!-- Sección de Selección de Categoría de Electrodomésticos -->
@@ -75,24 +78,23 @@
                     <h2>Categoría de Electrodoméstico</h2>
                     <select id="categoria-electrodomestico">
                         <option value="Seleccionar">Seleccionar</option>
-                        <option value="Cocina">Cocina</option>
-                        <option value="Limpieza">Limpieza</option>
-                        <option value="Climatización">Climatización</option>
-                        <option value="Entretenimiento">Entretenimiento</option>
-                        <option value="Iluminación">Iluminación</option>
-                        <option value="Seguridad_y_automatización">Seguridad y automatización</option>
+                        <option value="1">Cocina</option>
+                        <option value="2">Limpieza</option>
+                        <option value="3">Climatización</option>
+                        <option value="4">Entretenimiento</option>
+                        <option value="5">Iluminación</option>
+                        <option value="6">Seguridad y automatización</option>
                     </select>
-                    
+
                     <h2>Electrodoméstico Específico</h2>
                     <select id="electrodomestico">
                         <option value="Seleccionar">Seleccionar</option>
                     </select>
-                
+
                     <h2>Consumo Aproximado (Watts)</h2>
-                    <input type="number" placeholder="Watts" required>
+                    <input type="number" id="consumo-watts" placeholder="Watts" required>
                     <button class="button" id="Crear">Agregar Electrodoméstico</button>
                 </form>
-                <button class="button" id="Eliminar">Eliminar Electrodoméstico</button>
             </div>
 
             <div class="advice-section">
@@ -103,6 +105,7 @@
                             <th>Categoría</th>
                             <th>Electrodoméstico</th>
                             <th>Watts</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody id="tabla-datos">

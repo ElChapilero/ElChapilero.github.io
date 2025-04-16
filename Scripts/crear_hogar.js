@@ -27,3 +27,33 @@ document.getElementById('formulario').addEventListener('submit', (event) => {
       showNotification('¡Hubo un error al crear el perfil de hogar!');
     });
 });
+
+// Eliminar perfil de hogar
+document.getElementById('perfil-form').addEventListener('submit', (event) => {
+  event.preventDefault(); // Prevenir el envío tradicional del formulario
+
+  const idPerfilHogar = document.getElementById('tipo-hogar').value;
+
+  if (!idPerfilHogar || idPerfilHogar === "Seleccionar") {
+      alert("Por favor selecciona un perfil válido para eliminar.");
+      return;
+  }
+
+  fetch(`http://localhost:3000/eliminarPerfil/${idPerfilHogar}`, {
+      method: 'DELETE',
+  })
+  .then(response => {
+      if (!response.ok) throw new Error('Error al eliminar el perfil');
+      return response.json();
+  })
+  .then(data => {
+      console.log('Perfil eliminado:', data);
+      alert('Perfil de hogar eliminado correctamente');
+      location.reload(); // Recargar la página para reflejar los cambios
+  })
+  .catch(error => {
+      console.error('Error al eliminar el perfil:', error);
+      alert('Hubo un error al eliminar el perfil');
+  });
+});
+

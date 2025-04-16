@@ -128,6 +128,23 @@ app.post('/insertarPerfil', async (req, res) => {
     }
 });
 
+//Borrar perfil de hogar
+app.delete('/eliminarPerfil/:idPerfilHogar', async (req, res) => {
+    console.log(`Solicitud DELETE recibida para eliminar perfil con ID: ${req.params.idPerfilHogar}`);
+    const { idPerfilHogar } = req.params;
+
+    try {
+        const query = `DELETE FROM perfil_hogar WHERE id_perfil_hogar = $1;`;
+        await client.query(query, [idPerfilHogar]);
+        console.log(`Perfil de hogar eliminado correctamente: id_perfil_hogar=${idPerfilHogar}`);
+        res.status(200).json({ message: 'Perfil de hogar eliminado correctamente' });
+    } catch (err) {
+        console.error('Error al eliminar el perfil:', err);
+        res.status(500).json({ error: 'Error al eliminar el perfil' });
+    }
+});
+
+
 // llamada de los perfiles de hogar
 app.get('/obtenerPerfiles', async (req, res) => {
     // Obtenemos el ID del usuario desde la sesión
@@ -152,13 +169,44 @@ app.get('/obtenerPerfiles', async (req, res) => {
     }
 });
 
+// Ruta para obtener los datos del usuario autenticado: perfiles y electrodomésticos
+app.get('/datos', async (req, res) => {
+    const idUsuario = req.session.usuario?.id_usuario;
+
+    if (!idUsuario) {
+        return res.status(401).json({ error: 'No has iniciado sesión' });
+    }
+
+    try {
+        const query = `
+            SELECT 
+                ph.nombre AS perfil,
+                elec.id_electrodomesticos AS id_electrodomestico,
+                elec.nombre AS electrodomestico,
+                elec.watt AS consumo,
+                tip.nombre AS categoria
+            FROM perfil_hogar ph
+            LEFT JOIN electrodomesticos elec ON ph.id_perfil_hogar = elec.id_perfil_hogar
+            LEFT JOIN tipo_de_electrodomesticos tip ON elec.id_tp_electrodomestico = tip.id_tp_electrodomestico
+            WHERE ph.id_usuario = $1
+            ORDER BY ph.nombre, elec.nombre;
+        `;
+
+        const result = await client.query(query, [idUsuario]);
+        res.json(result.rows);
+    } catch (err) {
+        console.error('Error al obtener los datos del usuario:', err);
+        res.status(500).json({ error: 'Error al obtener los datos' });
+    }
+});
+
 // electrodomesticos segun tp hogar
 app.get('/obtenerElectrodomesticos/:idPerfilHogar', async (req, res) => {
     const { idPerfilHogar } = req.params;
 
     try {
         const query = `
-            SELECT elec.nombre AS electrodomestico, elec.watt AS consumo, tip.nombre AS categoria
+            SELECT elec.id_electrodomesticos AS id_electrodomestico, elec.nombre AS electrodomestico, elec.watt AS consumo, tip.nombre AS categoria
             FROM perfil_hogar ph
             INNER JOIN electrodomesticos elec ON ph.id_perfil_hogar = elec.id_perfil_hogar 
             INNER JOIN tipo_de_electrodomesticos tip ON tip.id_tp_electrodomestico = elec.id_tp_electrodomestico
@@ -201,7 +249,7 @@ app.post('/insertarElectrodomestico', async (req, res) => {
                 $1,
                 $2,
                 $3,
-                (SELECT id_tp_electrodomestico FROM tipo_de_electrodomesticos WHERE nombre = $4)
+                $4
             );
         `;
         await client.query(query, [idPerfilHogar, electrodomestico, watt, categoria]);
@@ -210,6 +258,43 @@ app.post('/insertarElectrodomestico', async (req, res) => {
     } catch (err) {
         console.error('Error al insertar electrodoméstico:', err);
         res.status(500).json({ error: 'Error al insertar electrodoméstico', detalle: err.message });
+    }
+});
+
+// Ruta para eliminar un electrodoméstico
+app.delete('/eliminarElectrodomestico/:id', async (req, res) => {
+    const idElectrodomestico = req.params.id;
+
+    // Validar sesión del usuario
+    const idUsuario = req.session.usuario?.id_usuario;
+    if (!idUsuario) {
+        return res.status(401).json({ error: 'No has iniciado sesión' });
+    }
+
+    try {
+        // Verificar que el electrodoméstico pertenece al usuario
+        const checkQuery = `
+            SELECT 1
+            FROM electrodomesticos e
+            JOIN perfil_hogar ph ON e.id_perfil_hogar = ph.id_perfil_hogar
+            WHERE e.id_electrodomesticos = $1 AND ph.id_usuario = $2;
+        `;
+        const checkResult = await client.query(checkQuery, [idElectrodomestico, idUsuario]);
+        if (checkResult.rows.length === 0) {
+            return res.status(403).json({ error: 'No tienes permiso para eliminar este electrodoméstico' });
+        }
+
+        // Eliminar el electrodoméstico
+        const deleteQuery = `
+            DELETE FROM electrodomesticos
+            WHERE id_electrodomesticos = $1;
+        `;
+        await client.query(deleteQuery, [idElectrodomestico]);
+
+        res.status(200).json({ message: 'Electrodoméstico eliminado correctamente' });
+    } catch (err) {
+        console.error('Error al eliminar electrodoméstico:', err);
+        res.status(500).json({ error: 'Error al eliminar electrodoméstico' });
     }
 });
 
