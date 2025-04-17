@@ -34,7 +34,7 @@ client.connect()
     .then(() => console.log('¡Conexión exitosa a PostgreSQL!'))
     .catch(err => console.error('Error al conectar a PostgreSQL:', err));
 
-// Registro de usuarios // trigger completo
+// Registro de usuarios
 app.post('/registrar', async (req, res) => {
     const { usuario, correo, contrasena } = req.body;
 
@@ -67,14 +67,9 @@ app.post('/login', async (req, res) => {
 
         if (result.rows.length > 0) {
             const isPasswordCorrect = contrasena === result.rows[0].contraseña;
-            // para contraseñas cifradas lo de abajo.
-            // const isPasswordCorrect = await bcrypt.compare(contrasena, result.rows[0].contraseña);
-
-            const logQuery = 'INSERT INTO login_historial (usuario_id, exito) VALUES ($1, $2)';
-            await client.query(logQuery, [result.rows[0].id_usuario, isPasswordCorrect]);
 
             if (isPasswordCorrect) {
-                req.session.usuario = result.rows[0]; // Guarda los datos del usuario en la sesión
+                req.session.usuario = result.rows[0];
                 console.log('Información de sesión:', req.session.usuario);
                 res.status(200).json({ message: 'Inicio de sesión exitoso', usuario: result.rows[0].nombre_usuario });
             } else {
@@ -90,6 +85,7 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ message: 'Error al iniciar sesión' });
     }
 });
+
 
 // Ruta del perfil
 app.get('/perfil', (req, res) => {
