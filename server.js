@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const session = require('express-session'); // Importa express-session
+const session = require('express-session');
 const { Client } = require('pg');
 
 const app = express();
@@ -14,10 +14,10 @@ app.use(bodyParser.json());
 
 // Configuración de sesiones
 app.use(session({
-    secret: 'tu_secreto_unico', // Cambia por un valor único y seguro
+    secret: 'tu_secreto_unico',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Cambia a `true` si estás usando HTTPS
+    cookie: { secure: false }
 }));
 
 // Configuración de PostgreSQL
