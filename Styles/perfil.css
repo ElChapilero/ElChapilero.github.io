@@ -150,8 +150,10 @@ body {
 .selection-section,
 .advice-section {
     display: flex;
-    flex-direction: column; /* Alineación horizontal */
-    gap: 0.2rem; /* Espaciado entre los elementos */
+    flex-direction: column;
+    /* Alineación horizontal */
+    gap: 0.2rem;
+    /* Espaciado entre los elementos */
     background-color: var(--white);
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -345,18 +347,31 @@ tr:nth-child(even) {
     opacity: 1;
 }
 
-/* boton borrar electrodomestico */
-.delete-button {
-    background-color: var(--gray);
-    color: white;
-    border: none;
-    padding: 4px 8px;
-    cursor: pointer;
-    border-radius: 5px;
+/* Contenedor para input + botón */
+.consumo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-.delete-button:hover {
-    background-color: var(--secondary2-color);
+.save-button, .delete-button {
+    cursor: pointer;
+    padding: 0.8rem;
+    border-radius: 0.5vw;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 1vw;
+    transition: background-color 0.3s ease;
+}
+
+.save-button:hover , .delete-button :hover {
+    background-color: var(--secondary-color);
+}
+.save-button {
+    width: 30%;
 }
 
 /* Pantallas medianas (tablets) */
@@ -490,7 +505,9 @@ tr:nth-child(even) {
         padding: 1rem;
     }
 
-    caption, th, td {
+    caption,
+    th,
+    td {
         padding: 1rem 0.5rem;
         border: 1px solid #ccc;
         text-align: center;
@@ -499,7 +516,8 @@ tr:nth-child(even) {
         overflow-wrap: break-word;
     }
 
-    td, th{
+    td,
+    th {
         font-size: 0.8rem;
     }
 

@@ -294,6 +294,43 @@ app.delete('/eliminarElectrodomestico/:id', async (req, res) => {
     }
 });
 
+// Ruta para actualizar el consumo de un electrodoméstico
+app.put('/actualizarConsumo/:id', async (req, res) => {
+    const idElectrodomestico = req.params.id;
+    const { nuevoConsumo } = req.body;
+  
+    const idUsuario = req.session.usuario?.id_usuario;
+    if (!idUsuario) {
+      return res.status(401).json({ error: 'No has iniciado sesión' });
+    }
+  
+    try {
+      // Verificar que el electrodoméstico pertenece al usuario
+      const checkQuery = `
+        SELECT 1 FROM electrodomesticos e
+        JOIN perfil_hogar ph ON e.id_perfil_hogar = ph.id_perfil_hogar
+        WHERE e.id_electrodomesticos = $1 AND ph.id_usuario = $2;
+      `;
+      const checkResult = await client.query(checkQuery, [idElectrodomestico, idUsuario]);
+      if (checkResult.rows.length === 0) {
+        return res.status(403).json({ error: 'No tienes permiso para actualizar este electrodoméstico' });
+      }
+  
+      // Actualizar el consumo
+      const updateQuery = `
+        UPDATE electrodomesticos
+        SET watt = $1
+        WHERE id_electrodomesticos = $2;
+      `;
+      await client.query(updateQuery, [nuevoConsumo, idElectrodomestico]);
+  
+      res.status(200).json({ message: 'Consumo actualizado correctamente' });
+    } catch (err) {
+      console.error('Error al actualizar el consumo:', err);
+      res.status(500).json({ error: 'Error al actualizar el consumo' });
+    }
+  });  
+
 // estado de sesión y nombre del usuario
 app.get('/checkSession', (req, res) => {
     if (req.session.usuario) {
