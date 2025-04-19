@@ -35,7 +35,7 @@ document.getElementById('perfil-form').addEventListener('submit', (event) => {
   const idPerfilHogar = document.getElementById('tipo-hogar').value;
 
   if (!idPerfilHogar || idPerfilHogar === "Seleccionar") {
-      alert("Por favor selecciona un perfil válido para eliminar.");
+      showNotification('¡Por favor selecciona un perfil válido para eliminar!');
       return;
   }
 
@@ -48,12 +48,12 @@ document.getElementById('perfil-form').addEventListener('submit', (event) => {
   })
   .then(data => {
       console.log('Perfil eliminado:', data);
-      alert('Perfil de hogar eliminado correctamente');
+      showNotification('¡Perfil de hogar eliminado correctamente!');
       location.reload(); // Recargar la página para reflejar los cambios
   })
   .catch(error => {
       console.error('Error al eliminar el perfil:', error);
-      alert('Hubo un error al eliminar el perfil');
+      showNotification('¡Hubo un error al eliminar el perfil!');
   });
 });
 
