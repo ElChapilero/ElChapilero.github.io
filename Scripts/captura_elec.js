@@ -35,6 +35,9 @@ formulario.addEventListener('submit', (event) => {
         .then(data => {
             console.log('Respuesta del servidor:', data);
             showNotification('¡Electrodoméstico agregado correctamente!');
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         })
         .catch(error => {
             console.error('Error al enviar los datos:', error);

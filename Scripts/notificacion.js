@@ -1,4 +1,4 @@
-function showNotification(message, duration = 3000) {
+function showNotification(message, duration = 1500) {
     const notification = document.getElementById('notification');
     const notificationMessage = document.getElementById('notification-message');
 
