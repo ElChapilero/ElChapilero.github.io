@@ -493,10 +493,22 @@ tr:nth-child(even) {
 /* Pantallas pequeñas (móviles) */
 @media screen and (max-width: 560px) {
 
-    .main-content .home {
-        gap: 2vw;
+    .save-button, .delete-button {
+        width: 100%;
     }
 
+    .consumo-wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-content .home {
+        width: 95%;
+        max-width: 95vw;
+        gap: 1vw;
+    }
+    
     .home {
         margin-bottom: 20px;
     }
@@ -505,9 +517,7 @@ tr:nth-child(even) {
         padding: 1rem;
     }
 
-    caption,
-    th,
-    td {
+    caption, th, td {
         padding: 1rem 0.5rem;
         border: 1px solid #ccc;
         text-align: center;
@@ -516,8 +526,7 @@ tr:nth-child(even) {
         overflow-wrap: break-word;
     }
 
-    td,
-    th {
+    td, th{
         font-size: 0.8rem;
     }
 

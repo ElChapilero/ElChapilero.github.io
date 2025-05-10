@@ -51,7 +51,7 @@ selectHogar.addEventListener('change', () => {
             </div>
           </td>
           <td>
-            <button class="delete-button">Borrar</button>
+            <button class="delete-button">🗑️</button>
           </td>
         `;
         tablaDatos.appendChild(fila);
