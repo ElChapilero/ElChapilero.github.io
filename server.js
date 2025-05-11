@@ -333,6 +333,30 @@ app.put('/actualizarConsumo/:id', async (req, res) => {
     }
   });
 
+// Historial
+// Endpoint para historial de consumo por perfil de hogar
+app.get('/historialConsumo/:id_perfil_hogar', async (req, res) => {
+  const { id_perfil_hogar } = req.params;
+
+  try {
+    const result = await client.query(
+      `SELECT 
+       TO_CHAR(fecha, 'MM/YYYY') AS "mes y año", 
+       consumo_total AS "watts totales", 
+       costo AS "consumo por mes $" 
+       FROM public.historial_consumo 
+       WHERE id_perfil_hogar = $1
+       ORDER BY fecha DESC;`,
+      [id_perfil_hogar]
+    );
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error al obtener historial:', error);
+    res.status(500).json({ error: 'Error al obtener historial de consumo' });
+  }
+});
+
 // estado de sesión y nombre del usuario
 app.get('/checkSession', (req, res) => {
     if (req.session.usuario) {

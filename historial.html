@@ -50,24 +50,33 @@
     <div class="main-content centered">
 
         <div class="home">
+            <div class="home-type-section">
+                <h2>Selecciona tu Hogar</h2>
+                <form id="perfil-form">
+                    <select id="tipo-hogar">
+                        <option value="Seleccionar">Seleccionar</option>
+                    </select>
+                </form>
+            </div>
+
             <div class="paper">
                 <h2>Historial de Consumo</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Mes</th>
+                            <th>Mes/Año</th>
                             <th>Consumo (kWh)</th>
                             <th>Costo Aproximado ($)</th>
                             <th>Cambios de Electrodomésticos</th>
                         </tr>
                     </thead>
                     <tbody id="tabla-historial">
-                        <!-- Se llena con JS -->
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <script src="Scripts/historial.js"></script>
     <script src="Scripts/menuperfil.js"></script>
     <script src="Scripts/movilemenu.js"></script>
 </body>
