@@ -296,10 +296,10 @@ app.delete('/eliminarElectrodomestico/:id', async (req, res) => {
     }
 });
 
-// Ruta para actualizar el consumo de un electrodoméstico
+// Ruta para actualizar el consumo y tiempo de un electrodoméstico
 app.put('/actualizarConsumo/:id', async (req, res) => {
     const idElectrodomestico = req.params.id;
-    const { nuevoConsumo } = req.body;
+    const { nuevoConsumo, nuevoTiempo } = req.body;
   
     const idUsuario = req.session.usuario?.id_usuario;
     if (!idUsuario) {
@@ -321,10 +321,10 @@ app.put('/actualizarConsumo/:id', async (req, res) => {
       // Actualizar el consumo
       const updateQuery = `
         UPDATE electrodomesticos
-        SET watt = $1
-        WHERE id_electrodomesticos = $2;
+        SET watt = $1, time = $2
+        WHERE id_electrodomesticos = $3;
       `;
-      await client.query(updateQuery, [nuevoConsumo, idElectrodomestico]);
+      await client.query(updateQuery, [nuevoConsumo, nuevoTiempo, idElectrodomestico]);
   
       res.status(200).json({ message: 'Consumo actualizado correctamente' });
     } catch (err) {
@@ -332,8 +332,6 @@ app.put('/actualizarConsumo/:id', async (req, res) => {
       res.status(500).json({ error: 'Error al actualizar el consumo' });
     }
   });
-// historial
-  
 
 // estado de sesión y nombre del usuario
 app.get('/checkSession', (req, res) => {
