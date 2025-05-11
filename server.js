@@ -180,6 +180,7 @@ app.get('/datos', async (req, res) => {
                 elec.id_electrodomesticos AS id_electrodomestico,
                 elec.nombre AS electrodomestico,
                 elec.watt AS consumo,
+                elec.time AS tiempo,
                 tip.nombre AS categoria
             FROM perfil_hogar ph
             LEFT JOIN electrodomesticos elec ON ph.id_perfil_hogar = elec.id_perfil_hogar
@@ -202,7 +203,7 @@ app.get('/obtenerElectrodomesticos/:idPerfilHogar', async (req, res) => {
 
     try {
         const query = `
-            SELECT elec.id_electrodomesticos AS id_electrodomestico, elec.nombre AS electrodomestico, elec.watt AS consumo, tip.nombre AS categoria
+            SELECT elec.id_electrodomesticos AS id_electrodomestico, elec.nombre AS electrodomestico, elec.watt AS consumo,elec.time AS tiempo, tip.nombre AS categoria
             FROM perfil_hogar ph
             INNER JOIN electrodomesticos elec ON ph.id_perfil_hogar = elec.id_perfil_hogar 
             INNER JOIN tipo_de_electrodomesticos tip ON tip.id_tp_electrodomestico = elec.id_tp_electrodomestico
@@ -218,7 +219,7 @@ app.get('/obtenerElectrodomesticos/:idPerfilHogar', async (req, res) => {
 
 // insertar datos de electrodomestico
 app.post('/insertarElectrodomestico', async (req, res) => {
-    const { idPerfilHogar, categoria, electrodomestico, watt } = req.body;
+    const { idPerfilHogar, categoria, electrodomestico, watt, time } = req.body;
 
     // Validar que el usuario esté en sesión
     const idUsuario = req.session.usuario?.id_usuario;
@@ -240,15 +241,16 @@ app.post('/insertarElectrodomestico', async (req, res) => {
 
         // Insertar el electrodoméstico en el perfil de hogar
         const query = `
-            INSERT INTO electrodomesticos (id_perfil_hogar, nombre, watt, id_tp_electrodomestico)
+            INSERT INTO electrodomesticos (id_perfil_hogar, nombre, watt, id_tp_electrodomestico, time)
             VALUES (
                 $1,
                 $2,
                 $3,
-                $4
+                $4,
+                $5
             );
         `;
-        await client.query(query, [idPerfilHogar, electrodomestico, watt, categoria]);
+        await client.query(query, [idPerfilHogar, electrodomestico, watt, categoria, time]);
         console.log(`Electrodoméstico insertado: ${electrodomestico} en la categoría ${categoria}`);
         res.status(200).json({ message: 'Electrodoméstico agregado correctamente' });
     } catch (err) {
@@ -329,7 +331,9 @@ app.put('/actualizarConsumo/:id', async (req, res) => {
       console.error('Error al actualizar el consumo:', err);
       res.status(500).json({ error: 'Error al actualizar el consumo' });
     }
-  });  
+  });
+// historial
+  
 
 // estado de sesión y nombre del usuario
 app.get('/checkSession', (req, res) => {
@@ -350,7 +354,6 @@ app.post('/logout', (req, res) => {
         res.json({ message: 'Sesión cerrada exitosamente' });
     });
 });
-
 
 // Inicia el servidor
 app.listen(port, () => {

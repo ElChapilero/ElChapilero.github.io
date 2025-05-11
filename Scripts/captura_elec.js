@@ -3,19 +3,21 @@ const perfilSelect = document.getElementById('tipo-hogar'); // Select para el pe
 const categoriaSelect = document.getElementById('categoria-electrodomestico');
 const electrodomesticoSelect = document.getElementById('electrodomestico');
 const consumoInput = document.querySelector('input[placeholder="Watts"]');
+const tiempoInput = document.querySelector('input[placeholder="Time"]');
 
 // Detectar el envío del formulario
 formulario.addEventListener('submit', (event) => {
     event.preventDefault(); // Prevenir el envío por defecto
 
     // Obtener los valores seleccionados y el consumo
-    const idPerfilHogar = perfilSelect.value; // ID dinámico del perfil seleccionado
+    const idPerfilHogar = perfilSelect.value;
     const categoria = categoriaSelect.value;
     const electrodomestico = electrodomesticoSelect.value;
     const watt = consumoInput.value;
+    const time = tiempoInput.value;
 
     // Validar que los campos tengan datos válidos
-    if (idPerfilHogar === "Seleccionar" || categoria === "Seleccionar" || electrodomestico === "Seleccionar" || !watt) {
+    if (idPerfilHogar === "Seleccionar" || categoria === "Seleccionar" || electrodomestico === "Seleccionar" || !watt || !time) {
         showNotification('¡Por favor, completa todos los campos antes de continuar!');
         return;
     }
@@ -24,7 +26,7 @@ formulario.addEventListener('submit', (event) => {
     fetch('http://localhost:3000/insertarElectrodomestico', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ idPerfilHogar, categoria, electrodomestico, watt })
+        body: JSON.stringify({ idPerfilHogar, categoria, electrodomestico, watt, time })
     })
         .then(response => {
             if (!response.ok) {

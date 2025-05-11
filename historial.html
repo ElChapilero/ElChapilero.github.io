@@ -14,10 +14,10 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">Ahorro de Energía</a>
-        
+
             <!-- Botón para dispositivos móviles -->
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        
+
             <!-- Menú desplegable -->
             <div id="navLinks" class="nav-links">
                 <a href="perfil.html" class="nav-item">Perfil de Hogar</a>
@@ -30,15 +30,15 @@
         <div id="profile-section" class="profile-container">
             <!-- Texto inicial que se reemplaza cuando el usuario está logueado -->
             <button class="menu-toggle-p" id="profile-name">Perfil</button>
-        
+
             <!-- Menú desplegable -->
             <div class="dropdown-menu">
                 <a id="login-btn" class="dropdown-item" href="sign_in.html">Iniciar Sesión</a>
                 <a id="register-btn" class="dropdown-item" href="register.html">Crear Cuenta</a>
                 <a id="logout-btn" class="dropdown-item" href="sign_in.html" style="display: none;">Cerrar Sesión</a>
-            </div>  
+            </div>
         </div>
-        
+
     </nav>
 
     <!-- Segunda Barra con el Título de la Ventana -->
@@ -61,91 +61,8 @@
                             <th>Cambios de Electrodomésticos</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Enero</td>
-                            <td>320</td>
-                            <td>85.000</td>
-                            <td>Bombillas LED</td>
-                        </tr>
-                        <tr>
-                            <td>Febrero</td>
-                            <td>295</td>
-                            <td>78.000</td>
-                            <td>Bombillas LED</td>
-                        </tr>
-                        <tr>
-                            <td>Marzo</td>
-                            <td>310</td>
-                            <td>82.000</td>
-                            <td>Bombillas LED</td>
-                        </tr>
-                        <tr>
-                            <td>Abril</td>
-                            <td>280</td>
-                            <td>74.000</td>
-                            <td>Lavadora</td>
-                        </tr>
-                        <tr>
-                            <td>Mayo</td>
-                            <td>265</td>
-                            <td>70.000</td>
-                            <td>Refrigerador</td>
-                        </tr>
-                        <tr>
-                            <td>Junio</td>
-                            <td>275</td>
-                            <td>72.000</td>
-                            <td>Refrigerador</td>
-                        </tr>
-                        <tr>
-                            <td>Enero</td>
-                            <td>320</td>
-                            <td>85.000</td>
-                            <td>Bombillas LED</td>
-                        </tr>
-                        <tr>
-                            <td>Febrero</td>
-                            <td>295</td>
-                            <td>78.000</td>
-                            <td>Bombillas LED</td>
-                        </tr>
-                        <tr>
-                            <td>Marzo</td>
-                            <td>310</td>
-                            <td>82.000</td>
-                            <td>Bombillas LED</td>
-                        </tr>
-                        <tr>
-                            <td>Abril</td>
-                            <td>280</td>
-                            <td>74.000</td>
-                            <td>Lavadora</td>
-                        </tr>
-                        <tr>
-                            <td>Mayo</td>
-                            <td>265</td>
-                            <td>70.000</td>
-                            <td>Refrigerador</td>
-                        </tr>
-                        <tr>
-                            <td>Junio</td>
-                            <td>275</td>
-                            <td>72.000</td>
-                            <td>Refrigerador</td>
-                        </tr>
-                        <tr>
-                            <td>Mayo</td>
-                            <td>265</td>
-                            <td>70.000</td>
-                            <td>Refrigerador</td>
-                        </tr>
-                        <tr>
-                            <td>Junio</td>
-                            <td>275</td>
-                            <td>72.000</td>
-                            <td>Refrigerador</td>
-                        </tr>
+                    <tbody id="tabla-historial">
+                        <!-- Se llena con JS -->
                     </tbody>
                 </table>
             </div>

@@ -370,9 +370,6 @@ tr:nth-child(even) {
 .save-button:hover , .delete-button :hover {
     background-color: var(--secondary-color);
 }
-.save-button {
-    width: 30%;
-}
 
 /* Pantallas medianas (tablets) */
 @media screen and (max-width: 768px) {

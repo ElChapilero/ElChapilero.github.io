@@ -47,10 +47,15 @@ selectHogar.addEventListener('change', () => {
           <td>
             <div class="consumo-wrapper">
               <input type="number" class="input-consumo" value="${dato.consumo}" />
-              <button class="save-button">Guardar</button>
             </div>
           </td>
           <td>
+            <div class="tiempo-wrapper">
+              <input type="number" class="input-tiempo" value="${dato.tiempo}" />
+            </div>
+          </td>
+          <td>
+            <button class="save-button">🧩</button>
             <button class="delete-button">🗑️</button>
           </td>
         `;
@@ -70,25 +75,27 @@ selectHogar.addEventListener('change', () => {
             });
         });
 
-        // Actualizar consumo
+        // Actualizar consumo y tiempo
         fila.querySelector('.save-button').addEventListener('click', () => {
           const nuevoConsumo = parseFloat(fila.querySelector('.input-consumo').value);
-          if (isNaN(nuevoConsumo) || nuevoConsumo <= 0) {
-            showNotification('¡Por favor ingresa un valor válido!');
+          const nuevoTiempo = parseFloat(fila.querySelector('.input-tiempo').value);
+
+          if (isNaN(nuevoConsumo) || nuevoConsumo <= 0 || isNaN(nuevoTiempo) || nuevoTiempo <= 0) {
+            showNotification('¡Por favor ingresa valores válidos!');
             return;
           }
 
           fetch(`http://localhost:3000/actualizarConsumo/${dato.id_electrodomestico}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nuevoConsumo })
+            body: JSON.stringify({ nuevoConsumo, nuevoTiempo })
           })
             .then(response => {
-              if (!response.ok) throw new Error('Error al actualizar el consumo');
-              showNotification('¡Consumo actualizado correctamente!');
+              if (!response.ok) throw new Error('Error al actualizar datos');
+              showNotification('¡Datos actualizados correctamente!');
             })
             .catch(error => {
-              console.error('Error al actualizar el consumo:', error);
+              console.error('Error al actualizar los datos:', error);
             });
         });
       });
