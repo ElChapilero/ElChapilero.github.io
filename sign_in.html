@@ -12,10 +12,10 @@
 
 <body>
 	<!-- Notificacion -->
-    <div id="notification" class="hidden">
-        <img id="notification-icon" src="Image/logo_blanco.png" alt="Ícono de notificación">
-        <span id="notification-message"></span>
-    </div>
+	<div id="notification" class="hidden">
+		<img id="notification-icon" src="Image/logo_blanco.png" alt="Ícono de notificación">
+		<span id="notification-message"></span>
+	</div>
 	<!-- CONTENT SECTION -->
 	<div id="container" class="content-row">
 		<!-- SIGN IN CONTENT -->
@@ -30,7 +30,9 @@
 					más verde y responsable!
 				</p>
 				<div class="img">
-					<img src="Image/logo_blanco.png" alt="welcome">
+					<a href="index.html">
+						<img src="Image/logo_blanco.png" alt="welcome">
+					</a>
 				</div>
 			</div>
 		</div>
@@ -42,12 +44,13 @@
 						<div class="input-group">
 							<i class='bx bxs-user'></i>
 							<input type="text" name="usuario" id="usuario" placeholder="Usuario" required minlength="3"
-								maxlength="20" pattern="[A-Za-z0-9_]+" title="Solo letras, números y guion bajo, entre 3 y 20 caracteres">
+								maxlength="20" pattern="[A-Za-z0-9_]+"
+								title="Solo letras, números y guion bajo, entre 3 y 20 caracteres">
 						</div>
 						<div class="input-group">
 							<i class='bx bxs-lock-alt'></i>
-							<input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required minlength="4"
-								maxlength="20" title="Debe tener entre 4 y 20 caracteres">
+							<input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required
+								minlength="4" maxlength="20" title="Debe tener entre 4 y 20 caracteres">
 						</div>
 						<button type="submit" class="btn-redirect">Iniciar sesión</button>
 					</form>
