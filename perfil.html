@@ -92,10 +92,10 @@
                     </select>
 
                     <h2>Consumo (Watts)</h2>
-                    <input type="number" id="consumo-watts" placeholder="Watts" required>
+                    <input class="solo-positivos" type="number" id="consumo-watts" placeholder="Watts" min="1" required>
 
                     <h2>Tiempo de uso (h/d)</h2>
-                    <input type="number" id="tiempo-uso" placeholder="Time" required>
+                    <input class="solo-positivos" type="number" id="tiempo-uso" placeholder="Time" min="1" required>
                     <button class="button" id="Crear">Agregar Electrodoméstico</button>
                 </form>
                 <form id="btn-enviar-historial">
@@ -122,6 +122,7 @@
             </div>
         </div>
     </div>
+    <script src="Scripts/solo_num+.js"></script>
     <script src="Scripts/crear_historial.js"></script>
     <script src="Scripts/notificacion.js"></script>
     <script src="Scripts/captura_elec.js"></script>
