@@ -300,62 +300,92 @@ app.delete('/eliminarElectrodomestico/:id', async (req, res) => {
 app.put('/actualizarConsumo/:id', async (req, res) => {
     const idElectrodomestico = req.params.id;
     const { nuevoConsumo, nuevoTiempo } = req.body;
-  
+
     const idUsuario = req.session.usuario?.id_usuario;
     if (!idUsuario) {
-      return res.status(401).json({ error: 'No has iniciado sesión' });
+        return res.status(401).json({ error: 'No has iniciado sesión' });
     }
-  
+
     try {
-      // Verificar que el electrodoméstico pertenece al usuario
-      const checkQuery = `
+        // Verificar que el electrodoméstico pertenece al usuario
+        const checkQuery = `
         SELECT 1 FROM electrodomesticos e
         JOIN perfil_hogar ph ON e.id_perfil_hogar = ph.id_perfil_hogar
         WHERE e.id_electrodomesticos = $1 AND ph.id_usuario = $2;
       `;
-      const checkResult = await client.query(checkQuery, [idElectrodomestico, idUsuario]);
-      if (checkResult.rows.length === 0) {
-        return res.status(403).json({ error: 'No tienes permiso para actualizar este electrodoméstico' });
-      }
-  
-      // Actualizar el consumo
-      const updateQuery = `
+        const checkResult = await client.query(checkQuery, [idElectrodomestico, idUsuario]);
+        if (checkResult.rows.length === 0) {
+            return res.status(403).json({ error: 'No tienes permiso para actualizar este electrodoméstico' });
+        }
+
+        // Actualizar el consumo
+        const updateQuery = `
         UPDATE electrodomesticos
         SET watt = $1, time = $2
         WHERE id_electrodomesticos = $3;
       `;
-      await client.query(updateQuery, [nuevoConsumo, nuevoTiempo, idElectrodomestico]);
-  
-      res.status(200).json({ message: 'Consumo actualizado correctamente' });
+        await client.query(updateQuery, [nuevoConsumo, nuevoTiempo, idElectrodomestico]);
+
+        res.status(200).json({ message: 'Consumo actualizado correctamente' });
     } catch (err) {
-      console.error('Error al actualizar el consumo:', err);
-      res.status(500).json({ error: 'Error al actualizar el consumo' });
+        console.error('Error al actualizar el consumo:', err);
+        res.status(500).json({ error: 'Error al actualizar el consumo' });
     }
-  });
-
-// Historial
-// Endpoint para historial de consumo por perfil de hogar
-app.get('/historialConsumo/:id_perfil_hogar', async (req, res) => {
-  const { id_perfil_hogar } = req.params;
-
-  try {
-    const result = await client.query(
-      `SELECT 
-       TO_CHAR(fecha, 'MM/YYYY') AS "mes y año", 
-       consumo_total AS "watts totales", 
-       costo AS "consumo por mes $" 
-       FROM public.historial_consumo 
-       WHERE id_perfil_hogar = $1
-       ORDER BY fecha DESC;`,
-      [id_perfil_hogar]
-    );
-
-    res.json(result.rows);
-  } catch (error) {
-    console.error('Error al obtener historial:', error);
-    res.status(500).json({ error: 'Error al obtener historial de consumo' });
-  }
 });
+
+app.get('/historialConsumo/:id_perfil_hogar', async (req, res) => {
+    console.log("Ruta /historialConsumo ejecutada");
+
+    const idPerfil = req.params.id_perfil_hogar;
+    const { desde, hasta } = req.query;
+
+    let query = `
+        SELECT 
+            TO_CHAR(fecha, 'MM/YYYY') AS "mes y año",
+            consumo_total AS "watts totales",
+            costo AS "consumo por mes $"
+        FROM public.historial_consumo
+        WHERE id_perfil_hogar = $1
+    `;
+
+    const valores = [idPerfil];
+    let i = 2;
+
+    console.log("Filtros recibidos:", { desde, hasta });
+
+    if (desde) {
+        query += ` AND fecha >= $${i}`;
+        valores.push(`${desde}-01`);
+        i++;
+    }
+
+    if (hasta) {
+        const [anio, mes] = hasta.split('-');
+        const ultimoDia = new Date(parseInt(anio), parseInt(mes), 0).getDate();
+        const hastaCompleta = `${hasta}-${String(ultimoDia).padStart(2, '0')}`;
+        query += ` AND fecha <= $${i}`;
+        valores.push(hastaCompleta);
+        console.log("Fecha final utilizada:", hastaCompleta);
+        i++;
+    }
+
+    query += ` ORDER BY fecha DESC`;
+
+    console.log("Consulta SQL generada:", query);
+    console.log("Valores de la consulta:", valores);
+
+    try {
+        const result = await client.query(query, valores);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error al consultar historial:', error);
+        res.status(500).json({ error: 'Error en la consulta' });
+    }
+});
+
+
+
+
 
 // estado de sesión y nombre del usuario
 app.get('/checkSession', (req, res) => {
