@@ -38,7 +38,7 @@ h2 {
 
 h2,
 h3 {
-    margin-bottom: 1vw;
+    margin-bottom: 12px;
 }
 
 h3 {
@@ -269,7 +269,7 @@ tr:nth-child(even) {
 select {
     width: 100%;
     padding: 0.5rem;
-    margin-bottom: 1vw;
+    margin-bottom: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
