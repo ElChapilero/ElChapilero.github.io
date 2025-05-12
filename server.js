@@ -333,6 +333,7 @@ app.put('/actualizarConsumo/:id', async (req, res) => {
     }
 });
 
+// HistorialConsumo y filtro
 app.get('/historialConsumo/:id_perfil_hogar', async (req, res) => {
     console.log("Ruta /historialConsumo ejecutada");
 
@@ -383,7 +384,60 @@ app.get('/historialConsumo/:id_perfil_hogar', async (req, res) => {
     }
 });
 
+// Crear o actualizar Historial
+app.post('/crearOActualizarHistorial', async (req, res) => {
+  const { id_perfil_hogar } = req.body;
 
+  try {
+    const hoy = new Date();
+    const mes = hoy.getMonth() + 1;
+    const anio = hoy.getFullYear();
+
+    // Verificar si ya existe historial para este hogar en este mes
+    const existe = await client.query(
+      `SELECT id_historial FROM historial_consumo
+       WHERE id_perfil_hogar = $1 
+       AND EXTRACT(MONTH FROM fecha) = $2 
+       AND EXTRACT(YEAR FROM fecha) = $3`,
+      [id_perfil_hogar, mes, anio]
+    );
+
+    // Calcular consumo y costo
+    const resultado = await client.query(
+      `SELECT 
+         SUM(watt) AS consumo_total, 
+         ROUND(SUM(watt * time) * 0.6 / 1000, 3) AS costo
+       FROM electrodomesticos
+       WHERE id_perfil_hogar = $1`,
+      [id_perfil_hogar]
+    );
+
+    const { consumo_total, costo } = resultado.rows[0];
+
+    if (existe.rows.length > 0) {
+      // Ya existe → hacer UPDATE
+      const idHistorial = existe.rows[0].id_historial;
+      await client.query(
+        `UPDATE historial_consumo
+         SET consumo_total = $1, costo = $2, fecha = CURRENT_DATE
+         WHERE id_historial = $3`,
+        [consumo_total, costo, idHistorial]
+      );
+      res.json({ mensaje: 'Historial actualizado correctamente' });
+    } else {
+      // No existe → hacer INSERT
+      await client.query(
+        `INSERT INTO historial_consumo (id_perfil_hogar, consumo_total, costo, fecha)
+         VALUES ($1, $2, $3, CURRENT_DATE)`,
+        [id_perfil_hogar, consumo_total, costo]
+      );
+      res.json({ mensaje: 'Historial creado correctamente' });
+    }
+  } catch (error) {
+    console.error('Error al crear o actualizar historial:', error);
+    res.status(500).json({ error: 'Error en el servidor' });
+  }
+});
 
 
 
